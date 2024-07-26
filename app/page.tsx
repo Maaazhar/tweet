@@ -25,7 +25,6 @@ export default async function Home() {
     <AuthButtonServer />
     <NewTweet />
     {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
-    {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
     <Tweets tweets={tweets} />
   </>
 }
