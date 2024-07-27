@@ -9,7 +9,7 @@ export default function NewTweet() {
     const { data: { user } } = await supabase.auth.getUser()
 
     user && await supabase.from("tweets").insert({ title, user_id: user.id })
-    
+
     console.log("submitted");
   }
   return (
