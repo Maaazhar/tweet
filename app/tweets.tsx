@@ -5,6 +5,7 @@ import Likes from "./likes";
 import { useEffect, useOptimistic } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optimisticTweets, addOptimisticTweet] = useOptimistic<
@@ -48,9 +49,11 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           <span className="font-bold">
             {tweet.author.name}
           </span>
-          <span className="text-sm ml-2 text-gray-400">
-            {tweet.author.user_name}
-          </span>
+          <Link
+            href="/"
+            className="text-sm ml-5 text-gray-400 py-1 px-2 rounded hover:bg-gray-800">
+            @{tweet.author.user_name}
+          </Link>
         </p>
         <p>{tweet.title}</p>
         <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
