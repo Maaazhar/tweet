@@ -16,7 +16,7 @@ export default function GithubButton() {
   };
   return (
     <button onClick={handleSignIn}
-    className="hover:bg-gray-800 p-3 rounded-lg"
+    className="p-3 rounded-lg transition-all duration-500 ease-in-out hover:bg-gray-800 "
     title="Signin with github"
     >
       <Image
