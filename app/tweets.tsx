@@ -55,8 +55,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             @{tweet.author.user_name}
           </Link>
         </p>
-        <p className="text-sm text-gray-400 mt-2 mb-3">Created at {tweet.created_at}</p>
         {/* <time dateTime={tweet.created_at}>{tweet.created_at}</time> */}
+        <p className="text-sm text-gray-400 mt-2 mb-3">Created at {tweet.created_at}</p>
         <p>{tweet.title}</p>
         <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
       </div>
