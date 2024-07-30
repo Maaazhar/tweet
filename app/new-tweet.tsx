@@ -27,8 +27,8 @@ export default function NewTweet({ user }: { user: User }) {
           className="rounded-full" 
           width={48} height={48}/>
         </div>
-        <input type="text" name="title" className="bg-inherit flex-1 ml-2 px-2 text-2xl leading-loose placeholder-color-gray-500" 
-        placeholder="What is happening?!"/>
+        <input type="text" name="title" className="bg-inherit flex-1 ml-2 px-2 text-lg leading-loose placeholder-color-gray-500" 
+        placeholder="What is happening..!"/>
       </div>
     </form>
   )

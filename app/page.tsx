@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import NewTweet from "./new-tweet";
 import Likes from "./likes";
 import Tweets from "./tweets";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,7 @@ export default async function Home() {
     redirect("/login")
   }
 
-  const { data } = await supabase.from("tweets").select("*, author: profiles(*), likes(user_id)").order("created_at", {ascending: false})
+  const { data } = await supabase.from("tweets").select("*, author: profiles(*), likes(user_id)").order("created_at", { ascending: false })
 
   const tweets = data?.map(tweet => ({
     ...tweet,
@@ -27,11 +28,20 @@ export default async function Home() {
 
   return (
     <div className="w-full max-w-xl mx-auto">
-      <div className="flex justify-between px-4 py-6 border border-gray-800 border-t-0">
-        <h1 className="text-xl font-bolt">Tweets</h1>
-        <AuthButtonServer />
+      <div
+        className="flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0">
+        <div
+        className="flex gap-3 justify-around items-center">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={50} height={50}
+          />
+          <h1 className="text-gray-100 text-3xl font-bolt">Tweets</h1>
         </div>
-      <NewTweet user={session.user}/>
+        <AuthButtonServer />
+      </div>
+      <NewTweet user={session.user} />
       {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
       <Tweets tweets={tweets} />
     </div>)
