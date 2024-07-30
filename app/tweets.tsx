@@ -46,7 +46,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
       </div>
       <div className="ml-4 ">
         <p>
-          <span className="font-bold">
+          <span className="text-gray-100 font-bold">
             {tweet.author.name}
           </span>
           <Link
@@ -57,7 +57,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         </p>
         {/* <time dateTime={tweet.created_at}>{tweet.created_at}</time> */}
         <p className="text-sm text-gray-400 mt-2 mb-3">Created at {tweet.created_at}</p>
-        <p>{tweet.title}</p>
+        <p className="text-gray-100">{tweet.title}</p>
         <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
       </div>
     </div>
