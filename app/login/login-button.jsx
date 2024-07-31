@@ -3,7 +3,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 
-export default function LoginButton({provider, img}) {
+export default function LoginButton({ provider, img }) {
   // const supabase = createClientComponentClient<Database>()
   const supabase = createClientComponentClient()
   const handleSignIn = async () => {
@@ -16,13 +16,13 @@ export default function LoginButton({provider, img}) {
   };
   return (
     <button onClick={handleSignIn}
-    className="p-3 rounded-lg transition-all duration-500 ease-in-out hover:shadow-[1px_1px_10px_6px_#0F2F40]  "
-    title="Signin with github"
+      className="p-3 rounded-lg transition-all duration-500 ease-in-out hover:shadow-[1px_1px_10px_6px_#0F2F40]  "
+      title={"Signin with " + provider + " account"}
     >
       <Image
-      src={img}
-      alt="github logo"
-      width={40} height={40}
+        src={img}
+        alt="github logo"
+        width={40} height={40}
       />
     </button>
   )
