@@ -32,12 +32,13 @@ export default async function Home() {
         className="flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0">
         <div
           className="flex gap-3 justify-around items-center">
-
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={50} height={50}
-          />
+          <div className="p-2 rounded-full shadow-[1px_1px_50px_6px] shadow-cyan-500/50">
+            <Image
+              src="/logo.png"
+              alt="logo"
+              width={50} height={50}
+            />
+          </div>
           <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
         </div>
         <AuthButtonServer />
