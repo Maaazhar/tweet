@@ -2,6 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthButtonClient from "../auth-button-client";
 import GithubButton from "./github-button";
+import LoginButton from "./login-button";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 
@@ -28,7 +29,8 @@ export default async function Login() {
         <h4 className="text-lg text-gray-500">by using one of the following platforms.</h4>
       </div>
       <div className="flex justify-center items-center">
-        <GithubButton />
+        <LoginButton provider={"github"} img="/github-mark-white.png"/>
+        {/* <GithubButton /> */}
       </div>
       {/* <AuthButtonClient session={session} /> */}
     </div>
