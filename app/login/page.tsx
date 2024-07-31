@@ -17,7 +17,7 @@ export default async function Login() {
 
   return (
     <div className="flex-1 flex flex-col justify-center items-center">
-      <div className="p-5 mb-2 rounded-full shadow-[1px_1px_100px_6px] shadow-cyan-500/50">
+      <div className="p-5 mb-5 rounded-full shadow-[1px_1px_100px_6px] shadow-cyan-500/50">
         <Image
           src="/logo.png"
           alt="logo"
@@ -28,8 +28,9 @@ export default async function Login() {
         <h2 className="text-3xl tracking-wider text-gray-400">Login to Tweet</h2>
         <h4 className="text-lg text-gray-500">by using one of the following platforms.</h4>
       </div>
-      <div className="flex justify-center items-center">
-        <LoginButton provider={"github"} img="/github-mark-white.png"/>
+      <div className="flex gap-2 justify-center items-center">
+        <LoginButton provider={"github"} img="/github.png"/>
+        <LoginButton provider={"google"} img="/google.png"/>
         {/* <GithubButton /> */}
       </div>
       {/* <AuthButtonClient session={session} /> */}

@@ -22,7 +22,7 @@ export default function LoginButton({provider, img}) {
       <Image
       src={img}
       alt="github logo"
-      width={35} height={35}
+      width={40} height={40}
       />
     </button>
   )
