@@ -29,10 +29,10 @@ export default async function Home() {
   return (
     <div className="w-full max-w-xl mx-auto">
       <div
-        className="flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0">
+        className="sticky top-0 flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0 bg-gray-900/50 backdrop-blur z-10">
         <div
           className="flex gap-3 justify-around items-center">
-          <div className="p-2 rounded-full shadow-[1px_1px_50px_6px] shadow-cyan-500/50">
+          <div className="p-2 rounded-full shadow-[0px_0px_10px] shadow-cyan-500/50">
             <Image
               src="/logo.png"
               alt="logo"

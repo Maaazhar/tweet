@@ -22,7 +22,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     });
   };
 
-  return session ? (<button className="text-sm text-gray-400 py-1 px-2 rounded transition-all duration-500 ease-in-out hover:bg-red-300 hover:text-gray-950" onClick={handleSignOut}>Logout</button>)
+  return session ? (<button className="text-md font-medium text-gray-400 py-1 px-2 rounded-lg transition-all duration-300 ease-in-out hover:shadow-[0px_0px_10px] hover:shadow-red-500 hover:text-red-700" onClick={handleSignOut}>Logout</button>)
     : (<button className="text-sm text-gray-400 py-1 px-2 rounded hover:bg-gray-800 " onClick={handleSignIn}>Login</button>);
 
 }

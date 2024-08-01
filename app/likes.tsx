@@ -32,7 +32,7 @@ export default function Likes({ tweet, addOptimisticTweet }: { tweet: TweetWithA
   return (
     <button
       onClick={handleLikes}
-      className="group flex items-center mt-2 -translate-x-2 px-2 py-1 rounded hover:bg-gray-800"
+      className="group flex items-center mt-2 -translate-x-2 px-2 py-1 rounded hover:bg-gray-800 z-0"
       title={tweet.user_has_liked_tweet ? "Click to unlike" : "Click to like"}
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
