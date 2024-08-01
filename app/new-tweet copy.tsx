@@ -1,29 +1,21 @@
-import { User, createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+
 import Image from "next/image";
-// import { useRef } from "react";
+import addTweet from "./new-tweet-actions";
+import { useRef } from "react";
 
 export const dynamic = "force-dynamic";
 
 export default function NewTweet({ user }: { user: User }) {
-  // const ref = useRef<HTMLFormElement>(null)
-  const addTweet = async (formData: FormData) => {
-    "use server"
-    const title = String(formData.get("title"));
-    const supabase = createServerActionClient<Database>({ cookies });
-    // const { data: { user } } = await supabase.auth.getUser()
+  const ref = useRef<HTMLFormElement>(null)
 
-    // user && 
-    await supabase.from("tweets").insert({ title, user_id: user.id })
-
-    console.log("submitted");
-    // formData.reset();
-    // ref.current?.reset();
-  }
   return (
     <form
-      // ref={ref}
-      action={addTweet}
+      ref={ref}
+      // action={addTweet}
+      action={async (formData) => {
+        await addTweet(formData)
+        ref.current?.reset()
+      }}
       className="border border-gray-800 border-t-0"
     >
       <div className="flex py-5 px-4">
@@ -43,7 +35,7 @@ export default function NewTweet({ user }: { user: User }) {
       <div className="flex items-center justify-end mr-5 mb-5">
         <button
           type="submit"
-          className="py-1 px-5 text-gray-100 bg-sky-600 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:bg-transparent hover:text-sky-500"
+          className="py-1 px-5 text-gray-100 bg-sky-600 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_10px] hover:shadow-sky-600 hover:bg-transparent hover:text-sky-500"
         >
           Post
         </button>

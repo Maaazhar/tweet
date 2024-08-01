@@ -52,7 +52,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           <Link
             href="/"
             className="text-sm ml-3 text-gray-400 py-1 px-2 rounded hover:bg-gray-800">
-            @{tweet.author.user_name}
+            @{tweet.author.user_name ? tweet.author.user_name : tweet.author.user_email.split('@')[0]}
           </Link>
         </p>
         {/* <time dateTime={tweet.created_at}>{tweet.created_at}</time> */}
