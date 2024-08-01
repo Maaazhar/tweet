@@ -6,6 +6,7 @@ import NewTweet from "./new-tweet";
 import Likes from "./likes";
 import Tweets from "./tweets";
 import Image from "next/image";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -29,17 +30,28 @@ export default async function Home() {
   return (
     <div className="w-full max-w-xl mx-auto">
       <div
+      id="top"
         className="sticky top-0 flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0 bg-gray-900/50 backdrop-blur z-10">
         <div
-          className="flex gap-3 justify-around items-center">
-          <div className="p-2 rounded-full shadow-[0px_0px_10px] shadow-cyan-500/50">
+          className="flex gap-4 justify-around items-center">
+          <Link
+            href="#top"
+            className="p-2 rounded-full shadow-[0px_0px_10px] shadow-cyan-500/50 hover:shadow-[0px_0px_15px] hover:shadow-cyan-500/50">
             <Image
               src="/logo.png"
               alt="logo"
               width={50} height={50}
             />
+          </Link>
+
+          <div className="flex flex-col">
+            <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
+            <p
+            className="text-sm text-gray-400"
+            >
+              Welcome, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
+            </p>
           </div>
-          <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
         </div>
         <AuthButtonServer />
       </div>

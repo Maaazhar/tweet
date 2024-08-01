@@ -25,8 +25,8 @@ export default async function Login() {
         />
       </div>
       <div className="flex flex-col justify-center items-center mb-3">
-        <h2 className="text-3xl tracking-wider text-gray-400">Login to Tweet</h2>
-        <h4 className="text-lg text-gray-500">by using one of the following platforms.</h4>
+        <h2 className="text-3xl tracking-wider text-gray-400">Welcome to Tweet</h2>
+        <h4 className="text-lg text-gray-500 text-center">Please use one of the following platforms to <br /> Login to  the Tweet.</h4>
       </div>
       <div className="flex gap-2 justify-center items-center">
         <LoginButton provider={"github"} img="/github.png"/>

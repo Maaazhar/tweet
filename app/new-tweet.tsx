@@ -37,7 +37,7 @@ export default function NewTweet({ user }: { user: User }) {
         <textarea
           name="title"
           required
-          className="bg-inherit flex-1 ml-2 px-2 text-gray-100 text-md leading-loose focus:outline-none placeholder-color-gray-500 resize-none"
+          className="bg-inherit flex-1 ml-2 px-2 text-gray-100 text-md leading-loose focus:outline-none placeholder:text-slate-500 resize-none"
           placeholder="What is happening..!" />
       </div>
       <div className="flex items-center justify-end mr-5 mb-5">
