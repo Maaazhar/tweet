@@ -29,8 +29,9 @@ export default async function Login() {
         <h4 className="text-lg text-gray-500 text-center">Please use one of the following platforms to <br /> Login to  the Tweet.</h4>
       </div>
       <div className="flex gap-2 justify-center items-center">
-        <LoginButton provider={"github"} img="/github.png"/>
         <LoginButton provider={"google"} img="/google.png"/>
+        <LoginButton provider={"facebook"} img="/facebook.png"/>
+        {/* <LoginButton provider={"github"} img="/github.png"/> */}
         {/* <GithubButton /> */}
       </div>
       {/* <AuthButtonClient session={session} /> */}
