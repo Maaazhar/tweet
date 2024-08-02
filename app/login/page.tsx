@@ -30,8 +30,8 @@ export default async function Login() {
       </div>
       <div className="flex gap-2 justify-center items-center">
         <LoginButton provider={"google"} img="/google.png"/>
-        <LoginButton provider={"facebook"} img="/facebook.png"/>
-        {/* <LoginButton provider={"github"} img="/github.png"/> */}
+        {/* <LoginButton provider={"facebook"} img="/facebook.png"/> */}
+        <LoginButton provider={"github"} img="/github.png"/>
         {/* <GithubButton /> */}
       </div>
       {/* <AuthButtonClient session={session} /> */}
