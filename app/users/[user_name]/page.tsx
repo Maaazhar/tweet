@@ -3,7 +3,7 @@ import { useParams } from "next/navigation"
 
 export default function UserDetails() {
   return (
-    <div>{useParams().username}</div>
+    <div>{useParams().user_name}</div>
   )
 }
 

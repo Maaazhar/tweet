@@ -50,7 +50,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             {tweet.author.name}
           </span>
           <Link
-            href="/"
+            // href="/user/"
+            href={`/users/${tweet.author.user_name ? tweet.author.user_name : tweet.author.user_email.split('@')[0]}`}
             className="text-sm ml-3 text-gray-400 py-1 px-2 rounded hover:bg-gray-800">
             @{tweet.author.user_name ? tweet.author.user_name : tweet.author.user_email.split('@')[0]}
           </Link>
