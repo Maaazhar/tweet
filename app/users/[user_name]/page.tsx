@@ -1,11 +1,4 @@
 
-export const dynamicParams = true
-
-interface Props {
-  params: {
-    user_name: string;
-  }
-}
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthButtonServer from "../../auth-button-server";
@@ -15,9 +8,17 @@ import Tweets from "../../tweets";
 import Image from "next/image";
 import Link from "next/link";
 
+export const dynamicParams = true
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
+interface Props {
+  params: {
+    user_name: string;
+  }
+  source: string;
+}
+
+export default async function UserDetails({ params }: Props) {
   const supabase = createServerComponentClient<Database>({ cookies })
 
   const { data: { session } } = await supabase.auth.getSession()
@@ -37,7 +38,7 @@ export default async function Home() {
   return (
     <div className="w-full max-w-xl mx-auto">
       <div
-      id="top"
+        id="top"
         className="sticky top-0 flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0 bg-gray-900/50 backdrop-blur z-10">
         <div
           className="flex gap-4 justify-around items-center">
@@ -54,7 +55,7 @@ export default async function Home() {
           <div className="flex flex-col">
             <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
             <p
-            className="text-sm text-gray-400"
+              className="text-sm text-gray-400"
             >
               Welcome, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
             </p>
@@ -64,7 +65,7 @@ export default async function Home() {
       </div>
       <NewTweet user={session.user} />
       {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
-      <Tweets tweets={tweets} />
+      <Tweets tweets={tweets} user={params.user_name}/>
     </div>)
 }
 
