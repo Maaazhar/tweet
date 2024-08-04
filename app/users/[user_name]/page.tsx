@@ -40,32 +40,33 @@ export default async function UserDetails({ params }: Props) {
       <div
         id="top"
         className="sticky top-0 flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0 bg-gray-900/50 backdrop-blur z-10">
-        <div
-          className="flex gap-4 justify-around items-center">
-          <Link
-            href="#top"
-            className="p-2 rounded-full shadow-[0px_0px_10px] shadow-cyan-500/50 hover:shadow-[0px_0px_15px] hover:shadow-cyan-500/50">
-            <Image
+        <Link
+          href="/"
+          className="p-3 bg-sky-600 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:bg-transparent hover:text-sky-500">
+          {/* <Image
               src="/logo.png"
               alt="logo"
               width={50} height={50}
-            />
-          </Link>
+            /> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            width="20" height="20"
+            className="fill-gray-200"
+          >
+            <path
+              d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8 .4 34.3z" />
+          </svg>
+        </Link>
 
-          <div className="flex flex-col">
-            <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
-            <p
-              className="text-sm text-gray-400"
-            >
-              Welcome, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
-            </p>
-          </div>
+        <div className="flex flex-col">
+          <h1 className="text-gray-300/80 text-xl font-bolt">Tweets of {params.user_name}</h1>
         </div>
         <AuthButtonServer />
       </div>
       <NewTweet user={session.user} />
       {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
-      <Tweets tweets={tweets} user={params.user_name}/>
+      <Tweets tweets={tweets} user={params.user_name} />
     </div>)
 }
 
