@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 
 interface Props {
   params: {
-    user_name: string;
+    user: string;
   }
   source: string;
 }
@@ -35,6 +35,33 @@ export default async function UserDetails({ params }: Props) {
     likes: tweet.likes.length
   })) ?? []
 
+  
+  const getUserInfo = async () => {
+    const { data } = await supabase.from("profiles").select()
+    const userInfo = data?.map((user, i) => {
+      if (user.user_name && params.user === user.user_name) {
+        // console.log("user from user_name: ", params.user);
+        return user;
+      }
+      if (user.user_email && params.user === user.user_email.split('@')[0]) {
+        // console.log("user from user_email: ", params.user);
+        // console.log(user, i);
+        
+        return user;
+      }
+      
+    })
+    console.log("USR:", userInfo);
+    return userInfo;
+  }
+  getUserInfo()
+
+  // console.log(getUserInfo())
+  // const userInfo = getUserInfo();
+  // console.log("return from function: ", userDetails);
+  
+
+
   return (
     <div className="w-full max-w-xl mx-auto">
       <div
@@ -42,6 +69,7 @@ export default async function UserDetails({ params }: Props) {
         className="sticky top-0 flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0 bg-gray-900/50 backdrop-blur z-10">
         <Link
           href="/"
+          title="Go back to the home"
           className="p-3 bg-sky-600 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:bg-transparent hover:text-sky-500">
           {/* <Image
               src="/logo.png"
@@ -60,13 +88,13 @@ export default async function UserDetails({ params }: Props) {
         </Link>
 
         <div className="flex flex-col">
-          <h1 className="text-gray-300/80 text-xl font-bolt">Tweets of {params.user_name}</h1>
+          <h1 className="text-gray-300/80 text-xl font-bolt">Tweets of {params.user}</h1>
         </div>
         <AuthButtonServer />
       </div>
       <NewTweet user={session.user} />
       {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
-      <Tweets tweets={tweets} user={params.user_name} />
+      <Tweets tweets={tweets}  />
     </div>)
 }
 
