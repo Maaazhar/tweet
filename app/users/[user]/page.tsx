@@ -26,7 +26,13 @@ export default async function UserDetails({ params }: Props) {
     redirect("/login")
   }
 
-  const { data } = await supabase.from("tweets").select("*, author: profiles(*), likes(user_id)").order("created_at", { ascending: false })
+  const { data } = await supabase
+    .from("tweets").select("*, author: profiles(*), likes(user_id)")
+    // .eq("profiles(user_name)", `${params.user}`)
+    .order("created_at", { ascending: false })
+
+  console.log(data);
+
 
   const tweets = data?.map(tweet => ({
     ...tweet,
@@ -35,31 +41,16 @@ export default async function UserDetails({ params }: Props) {
     likes: tweet.likes.length
   })) ?? []
 
-  
-  const getUserInfo = async () => {
-    const { data } = await supabase.from("profiles").select()
-    const userInfo = data?.map((user, i) => {
-      if (user.user_name && params.user === user.user_name) {
-        // console.log("user from user_name: ", params.user);
-        return user;
-      }
-      if (user.user_email && params.user === user.user_email.split('@')[0]) {
-        // console.log("user from user_email: ", params.user);
-        // console.log(user, i);
-        
-        return user;
-      }
-      
-    })
-    console.log("USR:", userInfo);
-    return userInfo;
-  }
-  getUserInfo()
 
-  // console.log(getUserInfo())
-  // const userInfo = getUserInfo();
-  // console.log("return from function: ", userDetails);
-  
+
+
+  const getUserInfo = async () => {
+    const { data } = await supabase.from("profiles").select().eq("user_name", params.user)
+    // console.log(data);
+    return data;
+  }
+  // getUserInfo()
+  console.log("user: ", getUserInfo);
 
 
   return (
@@ -93,9 +84,38 @@ export default async function UserDetails({ params }: Props) {
         <AuthButtonServer />
       </div>
       <NewTweet user={session.user} />
-      {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
-      <Tweets tweets={tweets}  />
+      <Tweets tweets={tweets} />
     </div>)
 }
 
+
+
+
+// BEGIN
+//   INSERT INTO public.profiles(id, name, user_name, user_email, avatar_url)
+//   VALUES (
+//     NEW.id,
+//     NEW.raw_user_meta_data->>'name',
+//     NEW.raw_user_meta_data->>'user_name',
+//     NEW.raw_user_meta_data->>'email',
+//     NEW.raw_user_meta_data->>'avatar_url'
+//   );
+//   RETURN NEW;
+// END;
+
+
+// BEGIN
+//   INSERT INTO public.profiles(id, name, user_name, user_email, avatar_url)
+//   VALUES (
+//     NEW.id,
+//     NEW.raw_user_meta_data->>'name',
+//     CASE
+//       WHEN NEW.raw_user_meta_data ? 'user_name' THEN NEW.raw_user_meta_data->>'user_name'
+//       ELSE split_part(NEW.raw_user_meta_data->>'email', '@', 1)
+//     END,
+//     split_part(NEW.raw_user_meta_data->>'email', '@', 1),
+//     NEW.raw_user_meta_data->>'avatar_url'
+//   );
+//   RETURN NEW;
+// END;
 
