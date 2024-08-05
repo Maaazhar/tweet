@@ -71,7 +71,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   // }
 
   return optimisticTweets.map((tweet, i) => (
-    <div key={tweet.id} className={`border border-gray-800 px-4 py-8 flex ${i === 0 ? ` ` : `border-t-0`}`}>
+    <div key={tweet.id}
+      className={`border border-gray-800 px-4 py-8 flex ${i === 0 ? ` ` : `border-t-0`}`}>
       <div className="h-12 w-12">
         <Image
           src={tweet.author.avatar_url}
