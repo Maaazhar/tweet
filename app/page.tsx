@@ -7,6 +7,7 @@ import Likes from "./likes";
 import Tweets from "./tweets";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "./footer";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +32,7 @@ export default async function Home() {
     <div className="w-full max-w-xl mx-auto">
       <div
       id="top"
-        className="sticky top-0 flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0 bg-gray-900/50 backdrop-blur z-10">
+        className="sticky top-0 flex justify-between items-center mt-3 px-4 py-6 border border-gray-800 bg-gray-900/50 backdrop-blur z-10">
         <div
           className="flex gap-4 justify-around items-center">
           <Link
@@ -58,5 +59,6 @@ export default async function Home() {
       <NewTweet user={session.user} />
       {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
       <Tweets tweets={tweets} />
+      <Footer/>
     </div>)
 }

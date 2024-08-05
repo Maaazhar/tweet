@@ -57,7 +57,7 @@ export default async function UserDetails({ params }: Props) {
     <div className="w-full max-w-xl mx-auto">
       <div
         id="top"
-        className="sticky top-0 flex justify-between items-center px-4 py-6 border border-gray-800 border-t-0 bg-gray-900/50 backdrop-blur z-10">
+        className="sticky top-0 flex justify-between items-center mt-3 px-4 py-6 border border-gray-800 bg-gray-900/50 backdrop-blur z-10">
         <Link
           href="/"
           title="Go back to the home"
@@ -79,7 +79,7 @@ export default async function UserDetails({ params }: Props) {
         </Link>
 
         <div className="flex flex-col">
-          <h1 className="text-gray-300/80 text-xl font-bolt">Tweets of {params.user}</h1>
+          <h1 className="text-gray-300/80 text-xl font-bolt">Tweets from {params.user}</h1>
         </div>
         <AuthButtonServer />
       </div>
