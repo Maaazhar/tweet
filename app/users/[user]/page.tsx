@@ -7,6 +7,7 @@ import NewTweet from "../../new-tweet";
 import Tweets from "../../tweets";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "@/app/footer";
 
 export const dynamicParams = true
 export const dynamic = "force-dynamic";
@@ -57,7 +58,7 @@ export default async function UserDetails({ params }: Props) {
     <div className="w-full max-w-xl mx-auto">
       <div
         id="top"
-        className="sticky top-0 flex justify-between items-center mt-3 px-4 py-6 border border-gray-800 bg-gray-900/50 backdrop-blur z-10">
+        className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/50 backdrop-blur z-10">
         <Link
           href="/"
           title="Go back to the home"
@@ -78,13 +79,16 @@ export default async function UserDetails({ params }: Props) {
           </svg>
         </Link>
 
-        <div className="flex flex-col">
-          <h1 className="text-gray-300/80 text-xl font-bolt">Tweets from {params.user}</h1>
-        </div>
+        <Link href="#top" title="Go to top">
+          <div className="flex flex-col group">
+            <h1 className="text-gray-300/80 text-xl font-bolt group-hover:text-gray-300/90">Tweets from {params.user}</h1>
+          </div>
+        </Link>
         <AuthButtonServer />
       </div>
       <NewTweet user={session.user} />
       <Tweets tweets={tweets} />
+      <Footer />
     </div>)
 }
 

@@ -24,7 +24,7 @@ export default function NewTweet({ user }: { user: User }) {
     <form
       // ref={ref}
       action={addTweet}
-      className="border border-gray-800 mt-2"
+      className="border border-gray-800"
     >
       <div className="flex py-5 px-4">
         <div className="h-12 w-12">

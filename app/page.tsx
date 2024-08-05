@@ -32,7 +32,7 @@ export default async function Home() {
     <div className="w-full max-w-xl mx-auto">
       <div
       id="top"
-        className="sticky top-0 flex justify-between items-center mt-3 px-4 py-6 border border-gray-800 bg-gray-900/50 backdrop-blur z-10">
+        className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/50 backdrop-blur z-10">
         <div
           className="flex gap-4 justify-around items-center">
           <Link
