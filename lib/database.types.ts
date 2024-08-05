@@ -57,15 +57,15 @@ export type Database = {
           avatar_url: string
           id: string
           name: string
-          user_email?: string | null
-          user_name?: string | null
+          user_email?: string 
+          user_name?: string 
         }
         Update: {
           avatar_url?: string
           id?: string
           name?: string
-          user_email?: string | null
-          user_name?: string | null
+          user_email?: string 
+          user_name?: string 
         }
         Relationships: [
           {

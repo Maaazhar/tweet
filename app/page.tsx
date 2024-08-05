@@ -29,36 +29,38 @@ export default async function Home() {
   })) ?? []
 
   return (
-    <div className="w-full max-w-xl mx-auto">
-      <div
-      id="top"
-        className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/50 backdrop-blur z-10">
+    <div className="w-full max-w-xl mx-auto flex flex-col justify-center items-between">
+      <div>
         <div
-          className="flex gap-4 justify-around items-center">
-          <Link
-            href="#top"
-            className="p-2 rounded-full shadow-[0px_0px_10px] shadow-cyan-500/50 hover:shadow-[0px_0px_15px] hover:shadow-cyan-500/50">
-            <Image
-              src="/logo.png"
-              alt="logo"
-              width={50} height={50}
-            />
-          </Link>
+          id="top"
+          className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
+          <div
+            className="flex gap-4 justify-around items-center">
+            <Link
+              href="#top"
+              className="p-2 rounded-full shadow-[0px_0px_10px] shadow-cyan-500/50 hover:shadow-[0px_0px_15px] hover:shadow-cyan-500/50">
+              <Image
+                src="/logo.png"
+                alt="logo"
+                width={50} height={50}
+              />
+            </Link>
 
-          <div className="flex flex-col">
-            <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
-            <p
-            className="text-sm text-gray-400"
-            >
-              Welcome, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
-            </p>
+            <div className="flex flex-col">
+              <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
+              <p
+                className="text-sm text-gray-400"
+              >
+                Welcome, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
+              </p>
+            </div>
           </div>
+          <AuthButtonServer />
         </div>
-        <AuthButtonServer />
+        <NewTweet user={session.user} />
+        {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
+        <Tweets tweets={tweets} />
       </div>
-      <NewTweet user={session.user} />
-      {/* <pre>{JSON.stringify(tweets, null, 2)}</pre> */}
-      <Tweets tweets={tweets} />
-      <Footer/>
+      <Footer />
     </div>)
 }
