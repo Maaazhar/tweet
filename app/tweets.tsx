@@ -35,41 +35,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     }
   }, [supabase, router])
 
-  // if (user) {
-  //   return optimisticTweets.filter((tweet) => {
-  //     if (tweet.author.name === user) {
-  //     return (
-  //       <div key={tweet.id} className="border border-gray-800 border-t-0 px-4 py-8 flex">
-  //         <div className="h-12 w-12">
-  //           <Image
-  //             src={tweet.author.avatar_url}
-  //             alt="tweeter"
-  //             className="rounded-full"
-  //             width={48} height={48} />
-  //         </div>
-  //         <div className="ml-4 ">
-  //           <p>
-  //             <span className="text-gray-300 font-bold">
-  //               {tweet.author.name}
-  //             </span>
-  //             <Link
-  //               // href="/user/"
-  //               href={`/users/${tweet.author.user_name ? tweet.author.user_name : tweet.author.user_email.split('@')[0]}`}
-  //               className="text-sm ml-3 text-gray-400 py-1 px-2 rounded hover:bg-gray-800">
-  //               @{tweet.author.user_name ? tweet.author.user_name : tweet.author.user_email.split('@')[0]}
-  //             </Link>
-  //           </p>
-  //           {/* <time dateTime={tweet.created_at}>{tweet.created_at}</time> */}
-  //           <p className="text-sm text-gray-400 mt-2 mb-3">Created at {tweet.created_at}</p>
-  //           <p className="text-gray-300">{tweet.title}</p>
-  //           <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
-  //         </div>
-  //       </div>
-  //     )
-  //   }
-  //   });
-  // }
-
   return optimisticTweets.map((tweet, i) => (
     <div key={tweet.id}
       className={`border border-gray-800 px-4 py-8 flex ${i === 0 ? ` ` : `border-t-0`}`}>

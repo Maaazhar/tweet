@@ -17,6 +17,8 @@ interface Props {
     user: string;
   }
   source: string;
+  userId: string;
+  userName: string;
 }
 
 export default async function UserDetails({ params }: Props) {
@@ -37,21 +39,21 @@ export default async function UserDetails({ params }: Props) {
     .eq("user_name", params.user)
     .single();
 
-  const userId = userData.id;
-  const userName = userData.name;
+  const userId: string = userData?.id as string;
+  const userName: string = userData?.name as string;
 
-  console.log("from twee: ", userId);
+  console.log("from tweet: ", userData);
 
 
   // Step 2: Fetch the tweets by the fetched user ID
-  const { data } = await supabase
+  const { data: tweetData } = await supabase
     .from("tweets")
     .select("*, author:profiles(*), likes(user_id)")
     .order("created_at", { ascending: false })
     .eq("user_id", userId)
 
 
-  const tweets = data?.map(tweet => ({
+  const tweets = tweetData?.map(tweet => ({
     ...tweet,
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
