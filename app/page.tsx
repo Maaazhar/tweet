@@ -29,8 +29,8 @@ export default async function Home() {
   })) ?? []
 
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col justify-center items-between">
-      <div>
+    <div className="w-full mx-auto flex flex-col justify-between items-center">
+      <div className="max-w-xl flex flex-col justify-center items-between">
         <div
           id="top"
           className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">

@@ -16,9 +16,6 @@ interface Props {
   params: {
     user: string;
   }
-  source: string;
-  userId: string;
-  userName: string;
 }
 
 export default async function UserDetails({ params }: Props) {
@@ -61,8 +58,8 @@ export default async function UserDetails({ params }: Props) {
   })) ?? []
 
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col justify-between items-between">
-      <div>
+    <div className="w-full mx-auto flex flex-col justify-between items-center">
+      <div className="max-w-xl flex flex-col justify-center items-between">
         <div
           id="top"
           className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
@@ -92,7 +89,8 @@ export default async function UserDetails({ params }: Props) {
           </Link>
           <AuthButtonServer />
         </div>
-        {session.user.id === userId && <NewTweet user={session.user} />}
+        {/* {session.user.id === userId && <NewTweet user={session.user} />} */}
+        <NewTweet user={session.user} />
         <Tweets tweets={tweets} />
       </div>
       <Footer />
