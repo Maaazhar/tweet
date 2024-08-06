@@ -92,7 +92,7 @@ export default async function UserDetails({ params }: Props) {
             {/* <p className="text-center text-sm text-slate-400">Hi, {session.user.user_metadata.full_name},
               {session.user.id === userId ? " welcome to your profile" : (<br /> + " welcome to the profile of " + userName)}
             </p> */}
-            <p className="text-center text-sm text-slate-400">Hi, {session.user.user_metadata.full_name}, <br />
+            <p className="text-center text-sm text-slate-400 mb-0.5">Hi, {session.user.user_metadata.full_name}, <br />
               {session.user.id === userId ? " welcome back to your profile." : (" welcome to  the profile of " + userName) + "."}
             </p>
             <div className="flex items-center gap-x-3">
@@ -104,7 +104,7 @@ export default async function UserDetails({ params }: Props) {
                   width={60} height={60} />
               </Link>
               <div className="flex flex-col group text-gray-400">
-                <h1 className="text-gray-300/80 text-xl font-bolt group-hover:text-gray-300/90">{userName}</h1>
+                <h1 className="text-gray-300/80 text-xl font-bolt capitalize group-hover:text-gray-300/90">{userName}</h1>
                 <Link
                   href={"mailto:" + userEmail}
                   className="text-sm hover:text-sky-500">{userEmail}</Link>

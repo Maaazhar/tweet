@@ -49,9 +49,11 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         <div className="ml-4 ">
           <div className="mb-1">
             <p>
-              <span className="text-slate-400 font-bold">
+            <Link
+                href={`/users/${tweet.author.user_name}`}
+                className="text-slate-400 font-bold capitalize hover:text-sky-500">
                 {tweet.author.name}
-              </span>
+              </Link>
               <Link
                 // href="/user/"
                 href={`/users/${tweet.author.user_name}`}
