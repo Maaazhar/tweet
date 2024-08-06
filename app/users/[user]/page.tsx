@@ -62,7 +62,7 @@ export default async function UserDetails({ params }: Props) {
 
   return (
     <div className="w-full mx-auto flex flex-col justify-between items-center">
-      <div className="max-w-2xl w-[36rem] flex flex-col justify-center items-between">
+      <div className="sm:max-w-xl w-11/12 flex flex-col justify-center items-between">
         <div
           id="top"
           className="sticky top-0 flex justify-between items-center my-3 px-4 py-2 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
@@ -78,7 +78,8 @@ export default async function UserDetails({ params }: Props) {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
-              width="20" height="20"
+              // width="20" height="20"
+              className="w-3 h-3 sm:w-5 sm:h-5"
               fill="currentColor"
               stroke="currentColor"
               stroke-width="2"
@@ -92,25 +93,25 @@ export default async function UserDetails({ params }: Props) {
             {/* <p className="text-center text-sm text-slate-400">Hi, {session.user.user_metadata.full_name},
               {session.user.id === userId ? " welcome to your profile" : (<br /> + " welcome to the profile of " + userName)}
             </p> */}
-            <p className="text-center text-sm text-slate-400 mb-0.5">Hi, {session.user.user_metadata.full_name}, <br />
+            {/* <p className="text-center text-sm text-slate-400 mb-0.5">Hi, {session.user.user_metadata.full_name}, <br />
               {session.user.id === userId ? " welcome back to your profile." : (" welcome to  the profile of " + userName) + "."}
-            </p>
-            <div className="flex items-center gap-x-3">
+            </p> */}
+            <div className="flex max-[400px]:flex-col max-[400px]:text-center items-center gap-x-3">
               <Link href="#top" title="Go to top">
                 <Image
                   src={userAvatar}
                   alt={"Image of" + userName}
-                  className="rounded-lg transition-all duration-300 ease-in-out  hover:shadow-[0px_0px_15px] hover:shadow-sky-600"
+                  className="rounded-lg max-[400px]:rounded-t-lg max-[400px]:rounded-b-none transition-all duration-300 ease-in-out  hover:shadow-[0px_0px_15px] hover:shadow-sky-600"
                   width={60} height={60} />
               </Link>
               <div className="flex flex-col group text-gray-400">
-                <h1 className="text-gray-300/80 text-xl font-bolt capitalize group-hover:text-gray-300/90">{userName}</h1>
+                <h1 className="text-gray-300/80 text-xl max-[350px]:text-lg font-bolt capitalize group-hover:text-gray-300/90">{userName}</h1>
                 <Link
                   href={"mailto:" + userEmail}
-                  className="text-sm hover:text-sky-500">{userEmail}</Link>
+                  className="text-sm max-[350px]:text-xs hover:text-sky-500">{userEmail}</Link>
                 <Link
                   href={"/users/" + userUserName}
-                  className="text-sm hover:text-sky-500">@{userUserName}</Link>
+                  className="text-sm max-[350px]:text-xs hover:text-sky-500">@{userUserName}</Link>
               </div>
             </div>
           </div>

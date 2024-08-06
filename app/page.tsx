@@ -30,7 +30,7 @@ export default async function Home() {
 
   return (
     <div className="w-full mx-auto flex flex-col justify-between items-center">
-      <div className="max-w-xl w-[36rem] flex flex-col justify-center items-between">
+      <div className="sm:max-w-xl w-11/12 flex flex-col justify-center items-between">
         <div
           id="top"
           className="sticky top-0 flex justify-between items-center my-3 px-4 py-2 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
@@ -46,10 +46,10 @@ export default async function Home() {
               />
             </Link>
 
-            <div className="flex flex-col">
-              <h1 className="text-slate-400 text-3xl font-bolt">Tweet</h1>
+            <div className="flex flex-col  text-center sm:text-left">
+              <h1 className="text-slate-400 text-3xl max-[400px]:text-2xl font-bolt">Tweet</h1>
               <p
-                className="text-sm text-gray-400"
+                className="text-sm max-[400px]:text-xs text-gray-400"
               >
                 Hi, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
               </p>
