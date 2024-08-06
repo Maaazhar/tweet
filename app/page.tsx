@@ -33,7 +33,7 @@ export default async function Home() {
       <div className="max-w-xl w-[36rem] flex flex-col justify-center items-between">
         <div
           id="top"
-          className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
+          className="sticky top-0 flex justify-between items-center my-3 px-4 py-2 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
           <div
             className="flex gap-4 justify-around items-center">
             <Link
@@ -51,7 +51,7 @@ export default async function Home() {
               <p
                 className="text-sm text-gray-400"
               >
-                Welcome, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
+                Hi, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
               </p>
             </div>
           </div>

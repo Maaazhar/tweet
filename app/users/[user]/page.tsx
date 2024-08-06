@@ -88,24 +88,30 @@ export default async function UserDetails({ params }: Props) {
                 d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8 .4 34.3z" />
             </svg>
           </Link>
-          <div className="flex items-center gap-x-3">
-            <div className="group rounded-lg transition-all duration-300 ease-in-out  hover:shadow-[0px_0px_15px] hover:shadow-sky-600">
+          <div className="flex flex-col items-center">
+            {/* <p className="text-center text-sm text-slate-400">Hi, {session.user.user_metadata.full_name},
+              {session.user.id === userId ? " welcome to your profile" : (<br /> + " welcome to the profile of " + userName)}
+            </p> */}
+            <p className="text-center text-sm text-slate-400">Hi, {session.user.user_metadata.full_name}, <br />
+              {session.user.id === userId ? " welcome back to your profile." : (" welcome to  the profile of " + userName) + "."}
+            </p>
+            <div className="flex items-center gap-x-3">
               <Link href="#top" title="Go to top">
                 <Image
                   src={userAvatar}
                   alt={"Image of" + userName}
-                  className="rounded-lg transition-all duration-300 ease-in-out"
+                  className="rounded-lg transition-all duration-300 ease-in-out  hover:shadow-[0px_0px_15px] hover:shadow-sky-600"
                   width={60} height={60} />
               </Link>
-            </div>
-            <div className="flex flex-col group text-gray-400">
-              <h1 className="text-gray-300/80 text-xl font-bolt group-hover:text-gray-300/90">{userName}</h1>
-              <Link
-                href={"mailto:" + userEmail}
-                className="text-sm hover:text-sky-500">{userEmail}</Link>
-              <Link
-                href={"/users/" + userUserName}
-                className="text-sm hover:text-sky-500">@{userUserName}</Link>
+              <div className="flex flex-col group text-gray-400">
+                <h1 className="text-gray-300/80 text-xl font-bolt group-hover:text-gray-300/90">{userName}</h1>
+                <Link
+                  href={"mailto:" + userEmail}
+                  className="text-sm hover:text-sky-500">{userEmail}</Link>
+                <Link
+                  href={"/users/" + userUserName}
+                  className="text-sm hover:text-sky-500">@{userUserName}</Link>
+              </div>
             </div>
           </div>
           <AuthButtonServer />
