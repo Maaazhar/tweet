@@ -55,7 +55,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
               <Link
                 // href="/user/"
                 href={`/users/${tweet.author.user_name}`}
-                className="text-sm ml-3 text-slate-500 py-1 px-2 rounded hover:bg-gray-800">
+                className="text-sm ml-1 text-slate-500 py-0.5 px-1 rounded hover:bg-gray-800">
                 @{tweet.author.user_name}
               </Link>
             </p>
