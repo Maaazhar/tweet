@@ -30,7 +30,7 @@ export default async function Home() {
 
   return (
     <div className="w-full mx-auto flex flex-col justify-between items-center">
-      <div className="max-w-xl flex flex-col justify-center items-between">
+      <div className="max-w-xl w-[36rem] flex flex-col justify-center items-between">
         <div
           id="top"
           className="sticky top-0 flex justify-between items-center my-3 px-4 py-6 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
@@ -47,7 +47,7 @@ export default async function Home() {
             </Link>
 
             <div className="flex flex-col">
-              <h1 className="text-gray-100 text-3xl font-bolt">Tweet</h1>
+              <h1 className="text-slate-400 text-3xl font-bolt">Tweet</h1>
               <p
                 className="text-sm text-gray-400"
               >
