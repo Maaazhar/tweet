@@ -46,6 +46,8 @@ export default async function UserDetails({ params }: Props) {
     .order("created_at", { ascending: false })
     .eq("user_id", userId)
 
+  const totalPost = tweetData?.length;
+
   const tweets = tweetData?.map(tweet => ({
     ...tweet,
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
@@ -90,21 +92,26 @@ export default async function UserDetails({ params }: Props) {
               {session.user.id === userId ? " welcome back to your profile." : (" welcome to  the profile of " + userName) + "."}
             </p> */}
             <div className="flex max-[400px]:flex-col max-[400px]:text-center items-center gap-x-3">
-              <Link href="#top" title="Go to top">
+              {/* <Link href="#top" title="Go to top">
                 <Image
                   src={userAvatar}
                   alt={"Image of" + userName}
                   className="rounded-lg max-[400px]:rounded-t-lg max-[400px]:rounded-b-none transition-all duration-300 ease-in-out  hover:shadow-[0px_0px_15px] hover:shadow-sky-600"
                   width={60} height={60} />
-              </Link>
+              </Link> */}
               <div className="flex flex-col group text-gray-400">
                 <h1 className="text-gray-300/80 text-xl max-[350px]:text-lg font-bolt capitalize group-hover:text-gray-300/90">{userName}</h1>
-                <Link
+                {/* <Link
                   href={"mailto:" + userEmail}
-                  className="text-sm max-[350px]:text-xs hover:text-sky-500">{userEmail}</Link>
+                  className="text-sm max-[350px]:text-xs hover:text-sky-500">{userEmail}
+                </Link> */}
+                <div className="flex justify-between">
                 <Link
                   href={"/users/" + userUserName}
-                  className="text-sm max-[350px]:text-xs hover:text-sky-500">@{userUserName}</Link>
+                  className="text-sm max-[350px]:text-xs hover:text-sky-500">@{userUserName}
+                </Link>
+                <p className="text-sm max-[350px]:text-xs">{totalPost} posts</p>
+              </div>
               </div>
             </div>
           </div>
