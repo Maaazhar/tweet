@@ -26,9 +26,6 @@ export default async function UserDetails({ params }: Props) {
     redirect("/login")
   }
 
-  console.log("from session: ", session.user.id);
-
-
   // Step 1: Fetch the user ID from the profiles table
   const { data: userData } = await supabase
     .from("profiles")
@@ -42,9 +39,6 @@ export default async function UserDetails({ params }: Props) {
   const userUserName: string = userData?.user_name as string;
   const userAvatar: string = userData?.avatar_url as string;
 
-  console.log("from tweet: ", userData);
-
-
   // Step 2: Fetch the tweets by the fetched user ID
   const { data: tweetData } = await supabase
     .from("tweets")
@@ -52,13 +46,12 @@ export default async function UserDetails({ params }: Props) {
     .order("created_at", { ascending: false })
     .eq("user_id", userId)
 
-
   const tweets = tweetData?.map(tweet => ({
     ...tweet,
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
     likes: tweet.likes.length
-  })) ?? []
+  })) ?? [];
 
   return (
     <div className="w-full mx-auto flex flex-col justify-between items-center">

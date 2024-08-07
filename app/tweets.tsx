@@ -8,17 +8,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
+
   const [optimisticTweets, addOptimisticTweet] = useOptimistic<
     TweetWithAuthor[],
-    TweetWithAuthor
-  >(tweets, (currentOptimisticTweets, newTweet) => {
-    const newOptimisticTweets = [...currentOptimisticTweets];
-    const index = newOptimisticTweets.findIndex(
-      (tweet) => tweet.id === newTweet.id
-    );
-    newOptimisticTweets[index] = newTweet;
-    return newOptimisticTweets;
-  });
+    TweetWithAuthor>(tweets, (currentOptimisticTweets, newTweet) => {
+      const newOptimisticTweets = [...currentOptimisticTweets];
+      const index = newOptimisticTweets.findIndex(
+        (tweet) => tweet.id === newTweet.id
+      );
+      newOptimisticTweets[index] = newTweet;
+      return newOptimisticTweets;
+    });
 
   const supabase = createClientComponentClient()
   const router = useRouter()
@@ -33,7 +33,73 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [supabase, router])
+  }, [supabase, router]);
+
+  //converting time in to user timezone
+  const convertToUserTimeZone = (dateString: string): string => {
+    // Parse the date string into a Date object
+    const date = new Date(dateString);
+
+    // Get the user's local time components
+    const options: Intl.DateTimeFormatOptions = {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+
+    // Use Intl.DateTimeFormat to get the formatted string
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+    // Return the final string
+    // return `posted on ${formattedDate}`;
+    return formattedDate;
+  };
+
+  // const dateString = "2024-08-06T05:30:09.643539+00:00";
+  // const result = convertToUserTimeZone(dateString);
+  // console.log(result);
+
+
+
+  // Alternative way
+  const convertToUserTimeZone1 = (dateString: string): string => {
+    const date = new Date(dateString);
+
+    // Get individual components of the date
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
+    const month = date.toLocaleString('en-US', { month: 'long' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    // Format hours and minutes to 12-hour format with leading zeros
+    const formattedHours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    const period = hours >= 12 ? 'PM' : 'AM';
+
+    // Format the final string
+    return `posted at ${formattedHours}:${formattedMinutes} ${period} on ${dayOfWeek}, ${month} ${day}, ${year}`;
+  };
+
+  // const dateString1 = "2024-08-06T05:30:09.643539+00:00";
+  // const result1 = convertToUserTimeZone1(dateString1);
+  // console.log(result1);
+
+  // Alternative way
+
+
+
+
+
+
+
+
+
 
   return optimisticTweets.map((tweet, i) => (
     <div key={tweet.id}
@@ -49,7 +115,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         <div className="ml-4 ">
           <div className="mb-1">
             <p>
-            <Link
+              <Link
                 href={`/users/${tweet.author.user_name}`}
                 className="text-slate-400 font-bold capitalize hover:text-sky-500">
                 {tweet.author.name}
@@ -64,7 +130,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             {/* <time dateTime={tweet.created_at}>{tweet.created_at}</time> */}
           </div>
           <div>
-            <p className="text-sm text-slate-500">Created at {tweet.created_at}</p>
+            <p className="text-sm text-slate-500">Created on {convertToUserTimeZone(tweet.created_at)}</p>
           </div>
         </div>
       </div>
