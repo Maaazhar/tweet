@@ -6,20 +6,39 @@ import Image from "next/image";
 export const dynamic = "force-dynamic";
 
 export default function NewTweet({ user }: { user: User }) {
-  // const ref = useRef<HTMLFormElement>(null)
+
   const addTweet = async (formData: FormData) => {
     "use server"
     const title = String(formData.get("title"));
     const supabase = createServerActionClient<Database>({ cookies });
-    // const { data: { user } } = await supabase.auth.getUser()
-
-    // user && 
     await supabase.from("tweets").insert({ title, user_id: user.id })
 
     console.log("submitted");
-    // formData.reset();
-    // ref.current?.reset();
+     // Clear the input field
+    //  const tweetTitle = document.getElementById('tweetTitle') as HTMLInputElement;
+    //  if (tweetTitle) {
+    //   tweetTitle.value = "";
+    //  }
   }
+
+
+  // const ref = useRef<HTMLFormElement>(null)
+
+  // const addTweet = async (formData: FormData) => {
+  //   "use server"
+  //   const title = String(formData.get("title"));
+  //   const supabase = createServerActionClient<Database>({ cookies });
+  //   // const { data: { user } } = await supabase.auth.getUser()
+
+  //   // user && 
+  //   await supabase.from("tweets").insert({ title, user_id: user.id })
+
+  //   console.log("submitted");
+  //   // formData.reset();
+  //   // ref.current?.reset();
+  // }
+
+
   return (
     <form
       // ref={ref}
@@ -37,6 +56,7 @@ export default function NewTweet({ user }: { user: User }) {
         <textarea
           name="title"
           required
+          id="tweetTitle"
           className="bg-inherit flex-1 ml-2 px-2 text-gray-100 text-md leading-loose focus:outline-none placeholder:text-slate-500 resize-none"
           placeholder="What is happening..!" />
       </div>

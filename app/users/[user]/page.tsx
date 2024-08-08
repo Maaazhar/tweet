@@ -60,7 +60,7 @@ export default async function UserDetails({ params }: Props) {
       <div className="sm:max-w-xl w-11/12 flex flex-col justify-center items-between">
         <div
           id="top"
-          className="sticky top-0 flex justify-between items-center my-3 px-4 py-2 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
+          className="sticky top-0 flex justify-between items-center gap-x-1.5 my-3 px-4 py-2 border border-gray-800 bg-gray-900/85 backdrop-blur z-10">
           <Link
             href="/"
             title="Go back to the home"
@@ -99,19 +99,23 @@ export default async function UserDetails({ params }: Props) {
                   className="rounded-lg max-[400px]:rounded-t-lg max-[400px]:rounded-b-none transition-all duration-300 ease-in-out  hover:shadow-[0px_0px_15px] hover:shadow-sky-600"
                   width={60} height={60} />
               </Link> */}
-              <div className="flex flex-col group text-gray-400">
-                <h1 className="text-gray-300/80 text-xl max-[350px]:text-lg font-bolt capitalize group-hover:text-gray-300/90">{userName}</h1>
+              <div className="flex flex-col items-center text-gray-400">
+                <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-gray-300/90">{userName}</h1>
                 {/* <Link
                   href={"mailto:" + userEmail}
                   className="text-sm max-[350px]:text-xs hover:text-sky-500">{userEmail}
                 </Link> */}
-                <div className="flex justify-between">
                 <Link
                   href={"/users/" + userUserName}
                   className="text-sm max-[350px]:text-xs hover:text-sky-500">@{userUserName}
                 </Link>
-                <p className="text-sm max-[350px]:text-xs">{totalPost} posts</p>
-              </div>
+                <p className="text-sm max-[350px]:text-xs">
+                  {totalPost &&
+                    totalPost > 1 ? (totalPost + " posts.")
+                    : totalPost === 1 ? (totalPost + " post.")
+                      : "No post yet."}
+                </p>
+                {/* <p className="text-sm max-[350px]:text-xs">{totalPost} posts</p> */}
               </div>
             </div>
           </div>

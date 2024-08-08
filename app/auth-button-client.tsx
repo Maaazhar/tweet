@@ -23,7 +23,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
   };
 
   return session ? (<button
-    className="text-md font-medium bg-red-600 text-slate-300 p-2 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-red-600 hover:bg-transparent hover:text-red-600"
+    className="text-md font-medium bg-red-500 text-slate-300 p-2 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-red-600 hover:bg-transparent hover:text-red-600"
     title="Click to logout"
     onClick={handleSignOut}>
     <svg
