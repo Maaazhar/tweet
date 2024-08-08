@@ -121,7 +121,7 @@ export default async function IndividualUser({ params }: Props) {
           </div>
           <AuthButtonServer />
         </div>
-        <UserDetails user={userData}/>
+        {/* <UserDetails user={userData}/> */}
         {session.user.id === userId && <NewTweet user={session.user} />}
         <Tweets tweets={tweets} />
       </div>
