@@ -1,4 +1,3 @@
-
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthButtonServer from "../../auth-button-server";
@@ -8,6 +7,7 @@ import Tweets from "../../tweets";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/app/footer";
+import UserDetails from "./user-details";
 
 export const dynamicParams = true
 export const dynamic = "force-dynamic";
@@ -18,7 +18,7 @@ interface Props {
   }
 }
 
-export default async function UserDetails({ params }: Props) {
+export default async function IndividualUser({ params }: Props) {
   const supabase = createServerComponentClient<Database>({ cookies })
 
   const { data: { session } } = await supabase.auth.getSession()
@@ -100,7 +100,7 @@ export default async function UserDetails({ params }: Props) {
                   width={60} height={60} />
               </Link> */}
               <div className="flex flex-col items-center text-gray-400">
-                <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-gray-300/90">{userName}</h1>
+                <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-gray-300/90">{userData?.name}</h1>
                 {/* <Link
                   href={"mailto:" + userEmail}
                   className="text-sm max-[350px]:text-xs hover:text-sky-500">{userEmail}
@@ -121,6 +121,7 @@ export default async function UserDetails({ params }: Props) {
           </div>
           <AuthButtonServer />
         </div>
+        <UserDetails user={userData}/>
         {session.user.id === userId && <NewTweet user={session.user} />}
         <Tweets tweets={tweets} />
       </div>
