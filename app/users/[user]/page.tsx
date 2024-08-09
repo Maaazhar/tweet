@@ -33,6 +33,9 @@ export default async function IndividualUser({ params }: Params) {
     .eq("user_name", params.user)
     .single();
 
+
+  const loggedInUser: string = session.user.user_metadata.full_name as string;
+
   const user = {
     "id": userData?.id as string,
     "name": userData?.name as string,
@@ -40,18 +43,21 @@ export default async function IndividualUser({ params }: Params) {
     "userName": userData?.user_name as string,
     "avatar": userData?.avatar_url as string,
   }
-  const userId: string = userData?.id as string;
-  const userName: string = userData?.name as string;
-  const userEmail: string = userData?.user_email as string;
-  const userUserName: string = userData?.user_name as string;
-  const userAvatar: string = userData?.avatar_url as string;
+
+
+  // const userId: string = userData?.id as string;
+  // const userName: string = userData?.name as string;
+  // const userEmail: string = userData?.user_email as string;
+  // const userUserName: string = userData?.user_name as string;
+  // const userAvatar: string = userData?.avatar_url as string;
+
 
   // Step 2: Fetch the tweets by the fetched user ID
   const { data: tweetData } = await supabase
     .from("tweets")
     .select("*, author:profiles(*), likes(user_id)")
     .order("created_at", { ascending: false })
-    .eq("user_id", userId)
+    .eq("user_id", user.id)
 
   const totalPost = tweetData?.length;
 
@@ -72,15 +78,9 @@ export default async function IndividualUser({ params }: Params) {
             href="/"
             title="Go back to the home"
             className="p-3 bg-sky-600 text-slate-200 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:text-sky-600 hover:bg-transparent">
-            {/* <Image
-              src="/logo.png"
-              alt="logo"
-              width={50} height={50}
-            /> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
-              // width="20" height="20"
               className="w-3 h-3 sm:w-5 sm:h-5"
               fill="currentColor"
               stroke="currentColor"
@@ -92,16 +92,7 @@ export default async function IndividualUser({ params }: Params) {
             </svg>
           </Link>
           <div className="flex flex-col items-center">
-            {/* <p className="text-center text-sm text-slate-400">Hi, {session.user.user_metadata.full_name},
-              {session.user.id === userId ? " welcome to your profile" : (<br /> + " welcome to the profile of " + userName)}
-            </p> */}
-            {/* <p className="text-center text-sm text-slate-400 mb-0.5">Hi, {session.user.user_metadata.full_name}, <br />
-              {session.user.id === userId ? " welcome back to your profile." : (" welcome to  the profile of " + userName) + "."}
-            </p> */}
             <div className="flex max-[400px]:flex-col max-[400px]:text-center items-center gap-x-3">
-              {/* <Link href="#top" title="Go to top">
-               
-              </Link> */}
               <div className="flex flex-col items-center text-gray-400">
                 <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-gray-300/90">{userData?.name}</h1>
 
@@ -117,7 +108,7 @@ export default async function IndividualUser({ params }: Params) {
           <AuthButtonServer />
         </div>
         <UserDetails user={user} />
-        {session.user.id === userId && <NewTweet user={session.user} />}
+        {session.user.id === user.id && <NewTweet user={session.user} />}
         <Tweets tweets={tweets} />
       </div>
       <Footer />
