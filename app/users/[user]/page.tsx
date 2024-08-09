@@ -12,13 +12,13 @@ import UserDetails from "./user-details";
 export const dynamicParams = true
 export const dynamic = "force-dynamic";
 
-interface Props {
+interface Params {
   params: {
     user: string;
   }
 }
 
-export default async function IndividualUser({ params }: Props) {
+export default async function IndividualUser({ params }: Params) {
   const supabase = createServerComponentClient<Database>({ cookies })
 
   const { data: { session } } = await supabase.auth.getSession()
@@ -33,6 +33,13 @@ export default async function IndividualUser({ params }: Props) {
     .eq("user_name", params.user)
     .single();
 
+  const user = {
+    "id": userData?.id as string,
+    "name": userData?.name as string,
+    "email": userData?.user_email as string,
+    "userName": userData?.user_name as string,
+    "avatar": userData?.avatar_url as string,
+  }
   const userId: string = userData?.id as string;
   const userName: string = userData?.name as string;
   const userEmail: string = userData?.user_email as string;
@@ -93,35 +100,23 @@ export default async function IndividualUser({ params }: Props) {
             </p> */}
             <div className="flex max-[400px]:flex-col max-[400px]:text-center items-center gap-x-3">
               {/* <Link href="#top" title="Go to top">
-                <Image
-                  src={userAvatar}
-                  alt={"Image of" + userName}
-                  className="rounded-lg max-[400px]:rounded-t-lg max-[400px]:rounded-b-none transition-all duration-300 ease-in-out  hover:shadow-[0px_0px_15px] hover:shadow-sky-600"
-                  width={60} height={60} />
+               
               </Link> */}
               <div className="flex flex-col items-center text-gray-400">
                 <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-gray-300/90">{userData?.name}</h1>
-                {/* <Link
-                  href={"mailto:" + userEmail}
-                  className="text-sm max-[350px]:text-xs hover:text-sky-500">{userEmail}
-                </Link> */}
-                <Link
-                  href={"/users/" + userUserName}
-                  className="text-sm max-[350px]:text-xs hover:text-sky-500">@{userUserName}
-                </Link>
+
                 <p className="text-sm max-[350px]:text-xs">
                   {totalPost &&
-                    totalPost > 1 ? (totalPost + " posts.")
-                    : totalPost === 1 ? (totalPost + " post.")
-                      : "No post yet."}
+                    totalPost > 1 ? ("Total " + totalPost + " posts.")
+                    : totalPost === 1 ? "Only a single post."
+                      : "Doesn't post anything."}
                 </p>
-                {/* <p className="text-sm max-[350px]:text-xs">{totalPost} posts</p> */}
               </div>
             </div>
           </div>
           <AuthButtonServer />
         </div>
-        {/* <UserDetails user={userData}/> */}
+        <UserDetails user={user} />
         {session.user.id === userId && <NewTweet user={session.user} />}
         <Tweets tweets={tweets} />
       </div>
