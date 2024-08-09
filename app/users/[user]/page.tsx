@@ -4,7 +4,6 @@ import AuthButtonServer from "../../auth-button-server";
 import { redirect } from "next/navigation";
 import NewTweet from "../../new-tweet";
 import Tweets from "../../tweets";
-import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/app/footer";
 import UserDetails from "./user-details";
@@ -33,7 +32,6 @@ export default async function IndividualUser({ params }: Params) {
     .eq("user_name", params.user)
     .single();
 
-
   const loggedInUser: string = session.user.user_metadata.full_name as string;
 
   const user = {
@@ -43,14 +41,6 @@ export default async function IndividualUser({ params }: Params) {
     "userName": userData?.user_name as string,
     "avatar": userData?.avatar_url as string,
   }
-
-
-  // const userId: string = userData?.id as string;
-  // const userName: string = userData?.name as string;
-  // const userEmail: string = userData?.user_email as string;
-  // const userUserName: string = userData?.user_name as string;
-  // const userAvatar: string = userData?.avatar_url as string;
-
 
   // Step 2: Fetch the tweets by the fetched user ID
   const { data: tweetData } = await supabase
@@ -95,7 +85,6 @@ export default async function IndividualUser({ params }: Params) {
             <div className="flex max-[400px]:flex-col max-[400px]:text-center items-center gap-x-3">
               <div className="flex flex-col items-center text-gray-400">
                 <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-gray-300/90">{userData?.name}</h1>
-
                 <p className="text-sm max-[350px]:text-xs">
                   {totalPost &&
                     totalPost > 1 ? ("Total " + totalPost + " posts.")
@@ -114,35 +103,3 @@ export default async function IndividualUser({ params }: Params) {
       <Footer />
     </div>)
 }
-
-
-
-
-// BEGIN
-//   INSERT INTO public.profiles(id, name, user_name, user_email, avatar_url)
-//   VALUES (
-//     NEW.id,
-//     NEW.raw_user_meta_data->>'name',
-//     NEW.raw_user_meta_data->>'user_name',
-//     NEW.raw_user_meta_data->>'email',
-//     NEW.raw_user_meta_data->>'avatar_url'
-//   );
-//   RETURN NEW;
-// END;
-
-
-// BEGIN
-//   INSERT INTO public.profiles(id, name, user_name, user_email, avatar_url)
-//   VALUES (
-//     NEW.id,
-//     NEW.raw_user_meta_data->>'name',
-//     CASE
-//       WHEN NEW.raw_user_meta_data ? 'user_name' THEN NEW.raw_user_meta_data->>'user_name'
-//       ELSE split_part(NEW.raw_user_meta_data->>'email', '@', 1)
-//     END,
-//     split_part(NEW.raw_user_meta_data->>'email', '@', 1),
-//     NEW.raw_user_meta_data->>'avatar_url'
-//   );
-//   RETURN NEW;
-// END;
-
