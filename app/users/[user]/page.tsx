@@ -71,7 +71,7 @@ export default async function IndividualUser({ params }: Params) {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
-              className="w-3 h-3 sm:w-5 sm:h-5"
+              className="w-4 h-4 sm:w-5 sm:h-5"
               fill="currentColor"
               stroke="currentColor"
               stroke-width="2"
