@@ -17,7 +17,7 @@ interface User {
 export default function UserDetails({ user }: User, loggedInUser: LoggedInUser) {
   return (
     <div
-      className="border border-gray-800 mb-3">
+      className="border border-gray-800 border-t-0 border-x-0 ">
       <div className="flex flex-col">
         <div className="flex justify-center p-5 h-60">
           <Image
@@ -38,11 +38,11 @@ export default function UserDetails({ user }: User, loggedInUser: LoggedInUser) 
         <h1 className="text-slate-400 text-2xl">{user.name}</h1>
         <Link
           href={"/" + user.userName}
-          className="text-md text-slate-500 hover:text-sky-500">@{user.userName}
+          className="w-fit text-md text-slate-500 hover:text-sky-500">@{user.userName}
         </Link>
         <Link
           href={"mailto:" + user.email}
-          className="text-md text-slate-500 hover:text-sky-500">{user.email}
+          className="w-fit text-md text-slate-500 hover:text-sky-500">{user.email}
         </Link>
       </div>
     </div>

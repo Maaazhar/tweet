@@ -103,7 +103,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
 
   return optimisticTweets.map((tweet, i) => (
     <div key={tweet.id}
-      className={`border border-gray-800 p-6 flex flex-col ${i === 0 ? ` ` : `border-t-0`}`}>
+      className={`border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col `}>
       <div className="flex items-center mb-3">
         <div className="h-12 w-12">
           <Image

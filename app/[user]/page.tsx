@@ -96,9 +96,11 @@ export default async function IndividualUser({ params }: Params) {
           </div>
           <AuthButtonServer />
         </div>
-        <UserDetails user={user} />
-        {session.user.id === user.id && <NewTweet user={session.user} />}
-        <Tweets tweets={tweets} />
+        <div className="border border-gray-800">
+          <UserDetails user={user} />
+          {session.user.id === user.id && <NewTweet user={session.user} />}
+          <Tweets tweets={tweets} />
+        </div>
       </div>
       <Footer />
     </div>)
