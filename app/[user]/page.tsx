@@ -40,6 +40,8 @@ export default async function IndividualUser({ params }: Params) {
     "email": userData?.user_email as string,
     "userName": userData?.user_name as string,
     "avatar": userData?.avatar_url as string,
+    "loggedInUserID" : session.user.id as string,
+    "loggedInUserName" : session.user.user_metadata.full_name as string,
   }
 
   // Step 2: Fetch the tweets by the fetched user ID

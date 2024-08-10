@@ -93,14 +93,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   // Alternative way
 
 
-
-
-
-
-
-
-
-
   return optimisticTweets.map((tweet, i) => (
     <div key={tweet.id}
       className={`border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col `}>
