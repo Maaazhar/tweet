@@ -116,20 +116,18 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           <div className="mb-1">
             <p>
               <Link
-                href={`/users/${tweet.author.user_name}`}
+                href={`/${tweet.author.user_name}`}
                 className="text-slate-400 font-bold capitalize hover:text-sky-500">
                 {tweet.author.name}
               </Link>
               <Link
-                // href="/user/"
-                href={`/users/${tweet.author.user_name}`}
+                href={`/${tweet.author.user_name}`}
                 className="text-sm ml-1 text-slate-500 py-0.5 px-1 rounded hover:bg-gray-800">
                 @{tweet.author.user_name}
               </Link>
             </p>
           </div>
           <div className="flex items-start gap-x-1">
-            {/* Created on  */}
             <svg xmlns="http://www.w3.org/2000/svg"
               className="text-slate-500 self-center"
               width="15" height="15"

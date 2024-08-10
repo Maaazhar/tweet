@@ -1,9 +1,9 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import AuthButtonServer from "../../auth-button-server";
+import AuthButtonServer from "../auth-button-server";
 import { redirect } from "next/navigation";
-import NewTweet from "../../new-tweet";
-import Tweets from "../../tweets";
+import NewTweet from "../new-tweet";
+import Tweets from "../tweets";
 import Link from "next/link";
 import Footer from "@/app/footer";
 import UserDetails from "./user-details";
@@ -74,9 +74,9 @@ export default async function IndividualUser({ params }: Params) {
               className="w-4 h-4 sm:w-5 sm:h-5"
               fill="currentColor"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round">
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round">
               <path
                 d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8 .4 34.3z" />
             </svg>

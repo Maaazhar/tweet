@@ -37,7 +37,7 @@ export default function UserDetails({ user }: User, loggedInUser: LoggedInUser) 
       <div className="flex flex-col px-10 pb-5">
         <h1 className="text-slate-400 text-2xl">{user.name}</h1>
         <Link
-          href={"/users/" + user.name}
+          href={"/" + user.userName}
           className="text-md text-slate-500 hover:text-sky-500">@{user.userName}
         </Link>
         <Link
