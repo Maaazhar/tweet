@@ -32,8 +32,6 @@ export default async function IndividualUser({ params }: Params) {
     .eq("user_name", params.user)
     .single();
 
-  const loggedInUser: string = session.user.user_metadata.full_name as string;
-
   const user = {
     "id": userData?.id as string,
     "name": userData?.name as string,
@@ -98,7 +96,7 @@ export default async function IndividualUser({ params }: Params) {
           </div>
           <AuthButtonServer />
         </div>
-        <div className="border border-gray-800">
+        <div className="border border-gray-800 border-b-0">
           <UserDetails user={user} />
           {session.user.id === user.id && <NewTweet user={session.user} />}
           <Tweets tweets={tweets} />

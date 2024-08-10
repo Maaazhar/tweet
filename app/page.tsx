@@ -57,7 +57,7 @@ export default async function Home() {
           </div>
           <AuthButtonServer />
         </div>
-        <div className="border border-gray-800">
+        <div className="border border-gray-800 border-b-0">
           <NewTweet user={session.user} />
           <Tweets tweets={tweets} />
         </div>
