@@ -32,22 +32,14 @@ export default async function IndividualUser({ params }: Params) {
     .eq("user_name", params.user)
     .single();
 
-  const user = {
-    "id": userData?.id as string,
-    "name": userData?.name as string,
-    "email": userData?.user_email as string,
-    "userName": userData?.user_name as string,
-    "avatar": userData?.avatar_url as string,
-    "loggedInUserID" : session.user.id as string,
-    "loggedInUserName" : session.user.user_metadata.full_name as string,
-  }
+  const userId = userData?.id as string;
 
   // Step 2: Fetch the tweets by the fetched user ID
   const { data: tweetData } = await supabase
     .from("tweets")
     .select("*, author:profiles(*), likes(user_id)")
     .order("created_at", { ascending: false })
-    .eq("user_id", user.id)
+    .eq("user_id", userId)
 
   const totalPost = tweetData?.length;
 
@@ -57,6 +49,17 @@ export default async function IndividualUser({ params }: Params) {
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
     likes: tweet.likes.length
   })) ?? [];
+
+  const user = {
+    "id": userData?.id as string,
+    "name": userData?.name as string,
+    "email": userData?.user_email as string,
+    "userName": userData?.user_name as string,
+    "avatar": userData?.avatar_url as string,
+    "joinedAt": userData?.joined_at as string,
+    "loggedInUserID": session.user.id as string,
+    "loggedInUserName": session.user.user_metadata.full_name as string,
+  }
 
   return (
     <div className="w-full mx-auto flex flex-col justify-between items-center">
