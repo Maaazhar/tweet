@@ -87,7 +87,12 @@ export default async function IndividualUser({ params }: Params) {
           <div className="flex flex-col items-center">
             <div className="flex max-[400px]:flex-col max-[400px]:text-center items-center gap-x-3">
               <div className="flex flex-col items-center text-gray-400">
-                <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-gray-300/90">{userData?.name}</h1>
+                <Link
+                href="#top"
+                title="Go to top"
+                >
+                <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-sky-400">{userData?.name}</h1>
+                </Link>
                 <p className="text-sm max-[350px]:text-xs">
                   {totalPost &&
                     totalPost > 1 ? ("Total " + totalPost + " posts.")
