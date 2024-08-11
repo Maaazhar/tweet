@@ -96,8 +96,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   return optimisticTweets.map((tweet, i) => (
     <div key={tweet.id}
       className={`border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col `}>
-      <div className="flex items-center mb-3">
-        <div className="h-12 w-12">
+      <div className="flex  mb-3">
+        <div className="h-12 w-12 max-[380px]:mt-1">
           <Image
             src={tweet.author.avatar_url}
             alt="tweeter"
@@ -119,9 +119,9 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
               </Link>
             </p>
           </div>
-          <div className="flex items-start gap-x-1">
+          <div className="flex items-start min:items-center gap-x-1">
             <svg xmlns="http://www.w3.org/2000/svg"
-              className="text-slate-500 self-center"
+              className="text-slate-500 mt-0.5 min:m-t-0"
               width="15" height="15"
               viewBox="0 0 24 24"
               fill="none"
@@ -139,7 +139,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         </div>
       </div>
       <div className="ml-2">
-        <p className="text-slate-300/85 break-words ">{tweet.title}</p>
+        <p className="text-slate-300/85 break-words">{tweet.title}</p>
         <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
       </div>
     </div >

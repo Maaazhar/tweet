@@ -43,14 +43,14 @@ export default function UserDetails({ user }: User) {
             </span>)}
         </h4>
       </div>
-      <div className="flex justify-center h-60">
+      <div className="flex justify-center h-48">
         <Image
           src="/userBG.jpeg"
           alt="User Background"
           className="object-cover"
-          width={600} height={100} />
+          width={600} height={192} />
       </div>
-      <div className="w-fit flex flex-col pl-8 pr-2 pb-3 -mt-16">
+      <div className="w-full flex flex-col items-center pr-2 pb-3 -mt-16">
         <div className="w-fit rounded-full bg-slate-900 p-2">
           <Image
             src={user.avatar}
