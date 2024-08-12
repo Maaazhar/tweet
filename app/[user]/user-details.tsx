@@ -45,7 +45,7 @@ export default function UserDetails({ user }: User) {
       </div>
       <div className="flex justify-center h-48">
         <Image
-          src="/userBG.jpeg"
+          src="/userBG.jpg"
           alt="User Background"
           className="object-cover"
           width={600} height={192} />
