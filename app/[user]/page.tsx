@@ -47,7 +47,8 @@ export default async function IndividualUser({ params }: Params) {
     ...tweet,
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
-    likes: tweet.likes.length
+    likes: tweet.likes.length,
+    deleteButton: userId === session.user.id && true
   })) ?? [];
 
   const user = {
@@ -60,6 +61,8 @@ export default async function IndividualUser({ params }: Params) {
     "loggedInUserID": session.user.id as string,
     "loggedInUserName": session.user.user_metadata.full_name as string,
   }
+
+  const deleteButton:boolean = true as boolean;
 
   return (
     <div className="w-full mx-auto flex flex-col justify-between items-center">
