@@ -158,7 +158,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           {tweet.deleteButton &&
             <button
               className="text-md font-medium text-slate-500 p-1.5 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-red-600 hover:bg-transparent hover:text-red-600"
-              title="Click to delete this tweet."
+              title="Click to delete this tweet. Once deleted it can't be retrieved."
               onClick={() => handleDelete(tweet.id)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
