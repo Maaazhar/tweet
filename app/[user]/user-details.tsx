@@ -31,6 +31,7 @@ export default function UserDetails({ user }: User) {
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
     return formattedDate;
   };
+
   return (
     <div
       className="border border-gray-800 border-t-0 border-x-0 p-5">

@@ -48,7 +48,7 @@ export default async function IndividualUser({ params }: Params) {
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
     likes: tweet.likes.length,
-    deleteButton: userId === session.user.id && true
+    deleteButton: userId === session.user.id ? true : false
   })) ?? [];
 
   const user = {
@@ -61,8 +61,6 @@ export default async function IndividualUser({ params }: Params) {
     "loggedInUserID": session.user.id as string,
     "loggedInUserName": session.user.user_metadata.full_name as string,
   }
-
-  const deleteButton:boolean = true as boolean;
 
   return (
     <div className="w-full mx-auto flex flex-col justify-between items-center">
@@ -91,10 +89,10 @@ export default async function IndividualUser({ params }: Params) {
             <div className="flex max-[400px]:flex-col max-[400px]:text-center items-center gap-x-3">
               <div className="flex flex-col items-center text-gray-400">
                 <Link
-                href="#top"
-                title="Go to top"
+                  href="#top"
+                  title="Go to top"
                 >
-                <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-sky-400">{userData?.name}</h1>
+                  <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-sky-400">{userData?.name}</h1>
                 </Link>
                 <p className="text-sm max-[350px]:text-xs">
                   {totalPost &&
