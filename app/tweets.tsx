@@ -39,10 +39,14 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
 
 
   const handleDelete = async (id: string) => {
-    await supabase
+    const { data, error } = await supabase
       .from("tweets")
       .delete()
-      .eq("id", id);
+      .eq("id", id)
+      .single();
+
+    error && console.log("Error: ",error);
+    data && console.log("Deleted data: ", data);
     router.refresh();
   };
 
