@@ -48,7 +48,7 @@ export default async function IndividualUser({ params }: Params) {
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
     likes: tweet.likes.length,
-    deleteButton: userId === session.user.id ? true : false
+    optionButton: userId === session.user.id ? true : false
   })) ?? [];
 
   const user = {

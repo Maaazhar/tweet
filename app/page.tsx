@@ -26,7 +26,7 @@ export default async function Home() {
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
     likes: tweet.likes.length,
-    deleteButton: false
+    optionButton: false
   })) ?? []
 
   return (
