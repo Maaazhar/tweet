@@ -71,14 +71,14 @@ export default async function IndividualUser({ params }: Params) {
           <Link
             href="/"
             title="Go back to the home"
-            className="p-3 bg-sky-600 text-slate-200 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:text-sky-600 hover:bg-transparent">
+            className="p-2 text-slate-500 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:text-sky-600 hover:bg-transparent">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
-              className="w-4 h-4 sm:w-5 sm:h-5"
+              className="size-5"
               fill="currentColor"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1"
               strokeLinecap="round"
               strokeLinejoin="round">
               <path
