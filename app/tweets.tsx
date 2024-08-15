@@ -119,7 +119,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
 
   return optimisticTweets.map((tweet, i) => (
     <div key={tweet.id}
-      className={`border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col `}>
+      className="border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col z-10">
       <div className="flex justify-between">
         <div className="flex  mb-3">
           <div className="h-12 w-12 max-[380px]:mt-1">
@@ -176,7 +176,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 </div>
               </button>
               {(optionClicked && tweetId === tweet.id) &&
-                <div className="absolute mt-10 p-2 flex flex-col gap-1 rounded-md border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
+                <div className="absolute z-20 mt-10 p-2 flex flex-col gap-1 rounded-md border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
                   <button
                     className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-red-600/10 hover:text-red-600"
                     title="Click to delete this tweet. Once deleted it can't be retrieved."

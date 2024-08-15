@@ -26,20 +26,6 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     className="text-md font-medium text-slate-500 p-2 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-red-600 hover:bg-transparent hover:text-red-600"
     title="Click to logout."
     onClick={handleSignOut}>
-    {/* <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      // width="24" height="24" 
-      className="w-5 h-5 sm:w-6 sm:h-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-      <polyline points="16 17 21 12 16 7"></polyline>
-      <line x1="21" y1="12" x2="9" y2="12"></line>
-    </svg> */}
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
