@@ -119,9 +119,9 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
 
   return optimisticTweets.map((tweet, i) => (
     <div key={tweet.id}
-      className="border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col z-10">
+      className="border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col">
       <div className="flex justify-between">
-        <div className="flex  mb-3">
+        <div className="relative z-0 flex  mb-3">
           <div className="h-12 w-12 max-[380px]:mt-1">
             <Image
               src={tweet.author.avatar_url}
@@ -129,7 +129,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
               className="rounded-full"
               width={48} height={48} />
           </div>
-          <div className="ml-4 ">
+          <div className="ml-4 relative z-0">
             <div className="mb-1">
               <p>
                 <Link
@@ -144,7 +144,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 </Link>
               </p>
             </div>
-            <div className="flex items-start min:items-center gap-x-1">
+            <div className="relative z-0 flex items-start min:items-center gap-x-1">
               <svg xmlns="http://www.w3.org/2000/svg"
                 className="text-slate-500 mt-0.5 min:m-t-0"
                 width="15" height="15"
@@ -158,14 +158,14 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              <p className="text-sm text-slate-500">
+              <p className="relative z-0 text-sm text-slate-500">
                 {convertToUserTimeZone(tweet.created_at)}</p>
             </div>
           </div>
         </div>
         <div>
           {tweet.optionButton &&
-            <div className="flex flex-col items-end">
+            <div className="relative z-20 flex flex-col items-end">
               <button className="group size-8 flex justify-center items-center rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-500/50 hover:bg-transparent"
                 onClick={() => optionSwitch(tweet.id)}
                 title="Click to see the options.">
@@ -176,7 +176,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 </div>
               </button>
               {(optionClicked && tweetId === tweet.id) &&
-                <div className="absolute z-20 mt-10 p-2 flex flex-col gap-1 rounded-md border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
+                <div className="absolute z-50 mt-10 p-2 flex flex-col gap-1 rounded-md border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
                   <button
                     className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-red-600/10 hover:text-red-600"
                     title="Click to delete this tweet. Once deleted it can't be retrieved."
