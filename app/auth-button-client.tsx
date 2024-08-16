@@ -53,7 +53,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     </button>
     {profileClicked &&
       <div 
-      className="absolute z-20 mt-3 -ml-12 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-slate-950 ">
+      className="absolute z-20 mt-3 -ml-12 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950 ">
         <Link
           href={"/" + userName}>
           <button
