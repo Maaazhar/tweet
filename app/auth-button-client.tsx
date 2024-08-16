@@ -3,10 +3,13 @@
 import { Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 export default function AuthButtonClient({ session }: { session: Session | null }) {
+  if (!session) {
+    redirect("/login")
+  }
   const [profileClicked, setProfileClicked] = useState(false);
   const supabase = createClientComponentClient<Database>();
   const router = useRouter()
@@ -20,11 +23,20 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     router.refresh();
   };
 
+  const userName = session.user.user_metadata.user_name ? session.user.user_metadata.user_name : session.user.user_metadata.email.split('@')[0];
+
+
+
+  const menuRef = useRef();
+  const switchRef = useRef();
+
+
   return session && (<div className="relative">
 
     <button
       className="flex flex-col justify-center items-center text-md font-medium text-slate-500 p-1.5 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:text-sky-600 hover:bg-transparent"
       title="Click to open more."
+      ref={switchRef}
       onClick={profileSwitcher}>
       {/* <div className="flex flex-col gap-y-1">
         <span className="w-6 h-0.5  bg-slate-500"></span>
@@ -32,7 +44,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
         <span className="w-6 h-0.5  bg-slate-500"></span>
       </div> */}
       <Image
-        src="/userBG1.jpg"
+        src={session.user.user_metadata.avatar_url}
         alt="User profile picture."
         className="size-10 rounded-full"
         width={50} height={50}>
@@ -41,9 +53,11 @@ export default function AuthButtonClient({ session }: { session: Session | null 
       {/*  */}
     </button>
     {profileClicked &&
-      <div className="absolute z-20 mt-3 -ml-10 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
+      <div 
+      ref={menuRef}
+      className="absolute z-20 mt-3 -ml-10 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
         <Link
-        href="/">
+          href={"/" + userName}>
           <button
             className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
             title="Click to open your profile.">
@@ -54,12 +68,13 @@ export default function AuthButtonClient({ session }: { session: Session | null 
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-5">
+              className="size-6">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
+
             <span>Profile</span>
           </button>
         </Link>

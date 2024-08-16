@@ -18,10 +18,10 @@ export default async function Home() {
   if (!session) {
     redirect("/login")
   }
+  
+  const { data: tweetData } = await supabase.from("tweets").select("*, author: profiles(*), likes(user_id)").order("created_at", { ascending: false })
 
-  const { data } = await supabase.from("tweets").select("*, author: profiles(*), likes(user_id)").order("created_at", { ascending: false })
-
-  const tweets = data?.map(tweet => ({
+  const tweets = tweetData?.map(tweet => ({
     ...tweet,
     author: Array.isArray(tweet.author) ? tweet.author[0] : tweet.author,
     user_has_liked_tweet: !!tweet.likes.find((like) => like.user_id === session.user.id),
