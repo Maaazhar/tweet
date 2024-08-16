@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optionClicked, setOptionClicked] = useState(false);
   const [tweetId, setTweetId] = useState("");
-  const optionSwitch = (id: string) => {
+  const optionSwitcher = (id: string) => {
     setOptionClicked((toggle) => !toggle);
     setTweetId(id);
   }
@@ -167,7 +167,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           {tweet.optionButton &&
             <div className="relative z-20 flex flex-col items-end">
               <button className="group size-8 flex justify-center items-center rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-500/50 hover:bg-transparent"
-                onClick={() => optionSwitch(tweet.id)}
+                onClick={() => optionSwitcher(tweet.id)}
                 title="Click to see the options.">
                 <div className="flex gap-0.5">
                   <span className="size-1 bg-slate-500 rounded-full group-hover:bg-sky-600"></span>
