@@ -176,7 +176,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 </div>
               </button>
               {(optionClicked && tweetId === tweet.id) &&
-                <div className="absolute z-50 mt-10 p-2 flex flex-col gap-1 rounded-md border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
+                <div className="absolute z-20 mt-10 -mr-6 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
                   <button
                     className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-red-600/10 hover:text-red-600"
                     title="Click to delete this tweet. Once deleted it can't be retrieved."

@@ -20,11 +20,11 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     router.refresh();
   };
 
-  return session && (<div>
+  return session && (<div className="relative">
 
     <button
-      className="flex flex-col justify-center items-center text-md font-medium text-slate-500 p-2 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-red-600 hover:bg-transparent hover:text-red-600"
-      title="Click to logout."
+      className="flex flex-col justify-center items-center text-md font-medium text-slate-500 p-1.5 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:text-sky-600 hover:bg-transparent"
+      title="Click to open more."
       onClick={profileSwitcher}>
       {/* <div className="flex flex-col gap-y-1">
         <span className="w-6 h-0.5  bg-slate-500"></span>
@@ -41,12 +41,12 @@ export default function AuthButtonClient({ session }: { session: Session | null 
       {/*  */}
     </button>
     {profileClicked &&
-      <div className="absolute z-50 mt-10 p-2 flex flex-col gap-1 rounded-md border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
+      <div className="absolute z-20 mt-3 -ml-10 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
         <Link
         href="/">
           <button
             className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
-            title="Click to edit this tweet.">
+            title="Click to open your profile.">
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
         </Link>
         <button
           className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-red-600/10 hover:text-red-600"
-          title="Click to delete this tweet. Once deleted it can't be retrieved."
+          title="Click to logout."
           onClick={handleSignOut}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
