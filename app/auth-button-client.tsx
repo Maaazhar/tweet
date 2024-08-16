@@ -36,7 +36,6 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     <button
       className="flex flex-col justify-center items-center text-md font-medium text-slate-500 p-1.5 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:text-sky-600 hover:bg-transparent"
       title="Click to open more."
-      ref={switchRef}
       onClick={profileSwitcher}>
       {/* <div className="flex flex-col gap-y-1">
         <span className="w-6 h-0.5  bg-slate-500"></span>
@@ -54,8 +53,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     </button>
     {profileClicked &&
       <div 
-      ref={menuRef}
-      className="absolute z-20 mt-3 -ml-10 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-sky-500/20 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-sky-500/30 ">
+      className="absolute z-20 mt-3 -ml-12 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_15px] shadow-slate-950 ">
         <Link
           href={"/" + userName}>
           <button
