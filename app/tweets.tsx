@@ -19,7 +19,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   }
 
   const handleOutsideClickOfOptionMenu = (e: any) => {
-    if (optionClicked && !optionRef.current?.contains(e.target as Node)) {
+    if (!optionClicked && !optionRef.current?.contains(e.target as Node)) {
       setOptionClicked(false)
     }
   }
