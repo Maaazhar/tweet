@@ -18,6 +18,15 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     console.log(!optionClicked, id);
   }
 
+  // const refNameGenerator = (id: string) => {
+  //   console.log("ref-" + id);
+  //   let refList : any = {}
+  //   let refSerial : string = "ref-" + id
+  //   refList[refSerial] = useRef<HTMLDivElement>(null);
+  //   console.log(refList);
+  //   return refList.refSerial
+  // }
+
   const handleOutsideClickOfOptionMenu = (e: any) => {
     if (!optionClicked && !optionRef.current?.contains(e.target as Node)) {
       setOptionClicked(false)
@@ -179,7 +188,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         <div >
           {tweet.optionButton &&
             <div
-              ref={optionRef}
+              // ref={optionRef}
+              // ref={() => refNameGenerator(tweet.id)}
               className="relative flex flex-col items-end">
               <button className="group size-8 flex justify-center items-center rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-500/50 hover:bg-transparent"
                 onClick={() => optionSwitcher(tweet.id)}
