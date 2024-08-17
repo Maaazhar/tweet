@@ -10,13 +10,23 @@ export default function AuthButtonClient({ session }: { session: Session | null 
   if (!session) {
     redirect("/login")
   }
-  const [profileClicked, setProfileClicked] = useState(false);
+  const [profileClicked, setProfileClicked] = useState<boolean>(false);
+  const profileRef = useRef<HTMLDivElement>(null);
+
   const supabase = createClientComponentClient<Database>();
   const router = useRouter()
 
   const profileSwitcher = () => {
-    setProfileClicked((toggle) => !toggle);
+    setProfileClicked((state: boolean) => !state);
   }
+
+  const handleOutsideClickOfProfileMenu = (e: any) => {
+    if (profileClicked && !profileRef.current?.contains(e.target as Node)) {
+      setProfileClicked(false)
+    }
+  }
+  window.addEventListener("click", handleOutsideClickOfProfileMenu)
+
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -26,22 +36,13 @@ export default function AuthButtonClient({ session }: { session: Session | null 
   const userName = session.user.user_metadata.user_name ? session.user.user_metadata.user_name : session.user.user_metadata.email.split('@')[0];
 
 
-
-  const menuRef = useRef();
-  const switchRef = useRef();
-
-
-  return session && (<div className="relative">
-
+  return session && (<div
+    ref={profileRef}
+    className="relative">
     <button
       className="flex flex-col justify-center items-center text-md font-medium text-slate-500 p-1.5 rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-600 hover:text-sky-600 hover:bg-transparent"
       title="Click to open more."
       onClick={profileSwitcher}>
-      {/* <div className="flex flex-col gap-y-1">
-        <span className="w-6 h-0.5  bg-slate-500"></span>
-        <span className="w-6 h-0.5  bg-slate-500"></span>
-        <span className="w-6 h-0.5  bg-slate-500"></span>
-      </div> */}
       <Image
         src={session.user.user_metadata.avatar_url}
         alt="User profile picture."
@@ -52,8 +53,8 @@ export default function AuthButtonClient({ session }: { session: Session | null 
       {/*  */}
     </button>
     {profileClicked &&
-      <div 
-      className="absolute z-20 mt-3 -ml-12 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950 ">
+      <div
+        className="absolute z-20 mt-3 -ml-12 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 ">
         <Link
           href={"/" + userName}>
           <button

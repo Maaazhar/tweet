@@ -2,18 +2,31 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Likes from "./likes";
-import { useEffect, useOptimistic, useState } from "react";
+import { useEffect, useOptimistic, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
-  const [optionClicked, setOptionClicked] = useState(false);
-  const [tweetId, setTweetId] = useState("");
+  const [optionClicked, setOptionClicked] = useState<boolean>(false);
+  const [tweetId, setTweetId] = useState<string>("");
+  const optionRef = useRef<HTMLDivElement>(null);
+
   const optionSwitcher = (id: string) => {
-    setOptionClicked((toggle) => !toggle);
+    setOptionClicked((state: boolean) => !state);
     setTweetId(id);
+    console.log(!optionClicked, id);
   }
+
+  const handleOutsideClickOfOptionMenu = (e: any) => {
+    if (optionClicked && !optionRef.current?.contains(e.target as Node)) {
+      setOptionClicked(false)
+    }
+  }
+
+  // window.addEventListener("click", handleOutsideClickOfOptionMenu)
+
+
   const [optimisticTweets, addOptimisticTweet] = useOptimistic<
     TweetWithAuthor[],
     TweetWithAuthor>(tweets, (currentOptimisticTweets, newTweet) => {
@@ -163,9 +176,11 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             </div>
           </div>
         </div>
-        <div>
+        <div >
           {tweet.optionButton &&
-            <div className="relative z-20 flex flex-col items-end">
+            <div
+              ref={optionRef}
+              className="relative flex flex-col items-end">
               <button className="group size-8 flex justify-center items-center rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-500/50 hover:bg-transparent"
                 onClick={() => optionSwitcher(tweet.id)}
                 title="Click to see the options.">
@@ -176,7 +191,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 </div>
               </button>
               {(optionClicked && tweetId === tweet.id) &&
-                <div className="absolute z-20 mt-10 -mr-5 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950 ">
+                <div className="absolute z-20 mt-10 -mr-5 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 ">
                   <button
                     className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
                     title="Click to edit this tweet."
