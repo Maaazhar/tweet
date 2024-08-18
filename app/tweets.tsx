@@ -6,6 +6,7 @@ import { useEffect, useOptimistic, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import TweetsRef from "./tweetsRef";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optionClicked, setOptionClicked] = useState<boolean>(false);
@@ -190,6 +191,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             <div
               // ref={optionRef}
               // ref={() => refNameGenerator(tweet.id)}
+              
+              
               className="relative flex flex-col items-end">
               <button className="group size-8 flex justify-center items-center rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-500/50 hover:bg-transparent"
                 onClick={() => optionSwitcher(tweet.id)}
