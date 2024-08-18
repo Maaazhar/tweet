@@ -6,7 +6,6 @@ import { useEffect, useOptimistic, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import TweetsRef from "./tweetsRef";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optionClicked, setOptionClicked] = useState<boolean>(false);
