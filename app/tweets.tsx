@@ -228,7 +228,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                       <span>Edit</span>
                     </button>
                   </div>
-                  <div>
+                  <div className="static">
                     <button
                       className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-red-600/10 hover:text-red-600"
                       title="Click to delete this tweet. Once deleted it can't be retrieved."
@@ -249,9 +249,10 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                       <span>Delete</span>
                     </button>
                     {deleteButtonClicked &&
-                      <div className="absolute top-0 left-0 w-screen h-screen bg-red-500">
-                        <h2>Delete Button Clicked</h2>
-                        <button onClick={deleteSwitcher}>Close</button>
+                      <div className="absolute top-0 left-0 p-2  bg-red-500">
+                        <h2>Are you sure to delete this post?</h2>
+                        <button onClick={deleteSwitcher}>No</button>
+                        <button onClick={deleteSwitcher}>Yes</button>
                       </div>
                     }
                   </div>
