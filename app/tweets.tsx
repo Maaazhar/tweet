@@ -210,7 +210,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 <div className="absolute z-20 mt-10 -mr-5 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 ">
                   <div>
                     <button
-                      className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
+                      className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 px-3 py-2 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
                       title="Click to edit this tweet."
                       onClick={() => handleEdit(tweet.id)}>
                       <svg
@@ -230,7 +230,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                   </div>
                   <div className="static">
                     <button
-                      className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-red-600/10 hover:text-red-600"
+                      className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 px-3 py-2 rounded-md transition-all duration-300 ease-in-out hover:bg-red-600/10 hover:text-red-600"
                       title="Click to delete this tweet. Once deleted it can't be retrieved."
                       // onClick={() => handleDelete(tweet.id)}>
                       onClick={deleteSwitcher}>
@@ -249,10 +249,33 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                       <span>Delete</span>
                     </button>
                     {deleteButtonClicked &&
-                      <div className="absolute top-0 left-0 p-2  bg-red-500">
-                        <h2>Are you sure to delete this post?</h2>
-                        <button onClick={deleteSwitcher}>No</button>
-                        <button onClick={deleteSwitcher}>Yes</button>
+                      <div className="fixed inset-0 flex justify-center items-center bg-slate-800/50">
+                        <div className="w-56 p-3 flex flex-col items-center text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 ">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-8 text-red-500">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                          </svg>
+                          <h3 className="text-lg text-slate-400">Confirm Delete</h3>
+                          <p className="text-sm text-slate-500">
+                            Are you sure you want to delete this post?
+                          </p>
+                          <div className="flex justify-around items-center gap-2">
+                            <button 
+                            className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
+                            onClick={deleteSwitcher}>Delete</button>
+                            <button 
+                            className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
+                            onClick={deleteSwitcher}>Cancel</button>
+                          </div>
+                        </div>
                       </div>
                     }
                   </div>
