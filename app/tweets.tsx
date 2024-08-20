@@ -13,6 +13,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [tweetId, setTweetId] = useState<string>("");
   const optionButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonOutSideRef = useRef<HTMLDivElement>(null);
+  const deleteButtonInSideRef = useRef<HTMLDivElement>(null);
 
   const optionSwitcher = (id: string) => {
     setOptionClicked((state: boolean) => !state);
@@ -28,8 +29,9 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     optionClicked &&
       optionButtonOutSideRef.current?.contains(e.target as Node) ?
       setOptionClicked(false)
-      : deleteButtonOutSideRef.current?.contains(e.target as Node) ?
-        setDeleteButtonClicked(false) : ""
+      : (deleteButtonOutSideRef.current?.contains(e.target as Node) &&
+        !deleteButtonInSideRef.current?.contains(e.target as Node)) ?
+        deleteSwitcher() : ""
   }
 
   window.addEventListener("click", handleOutsideClickOfOptionMenu)
@@ -248,7 +250,9 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           }
           {deleteButtonClicked &&
             <div ref={deleteButtonOutSideRef} className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/10">
-              <div className="w-56 p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
+              <div
+                ref={deleteButtonInSideRef}
+                className="w-56 p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
                 <div className="p-3 rounded-full bg-red-600 shadow-[0px_0px_10px] shadow-slate-950/50">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
