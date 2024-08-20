@@ -10,6 +10,7 @@ import Link from "next/link";
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optionClicked, setOptionClicked] = useState<boolean>(false);
   const [deleteButtonClicked, setDeleteButtonClicked] = useState<boolean>(false);
+  const [editButtonClicked, setEditButtonClicked] = useState<boolean>(false);
   const [tweetId, setTweetId] = useState<string>("");
   const optionButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonOutSideRef = useRef<HTMLDivElement>(null);
@@ -24,6 +25,10 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     setDeleteButtonClicked((state: boolean) => !state);
     setOptionClicked((state: boolean) => !state);
   }
+  const editSwitcher = () => {
+    setEditButtonClicked((state: boolean) => !state);
+    setOptionClicked((state: boolean) => !state);
+  }
 
   const handleOutsideClickOfOptionMenu = (e: any) => {
     optionClicked &&
@@ -33,7 +38,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         !deleteButtonInSideRef.current?.contains(e.target as Node)) ?
         deleteSwitcher() : ""
   }
-
   window.addEventListener("click", handleOutsideClickOfOptionMenu)
 
   const [optimisticTweets, addOptimisticTweet] = useOptimistic<
@@ -46,8 +50,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
       newOptimisticTweets[index] = newTweet;
       return newOptimisticTweets;
     });
-
-
 
   const supabase = createClientComponentClient()
   const router = useRouter()
@@ -159,7 +161,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 <Link
                   href={`/${tweet.author.user_name}`}
                   className="text-slate-400 font-bold capitalize hover:text-sky-500">
-                  {tweet.author.name}
+                  {tweet.author.name.toLowerCase()}
                 </Link>
                 <Link
                   href={`/${tweet.author.user_name}`}
@@ -204,12 +206,12 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           {(optionClicked && tweetId === tweet.id) &&
             <div>
               <div ref={optionButtonOutSideRef} className="fixed z-20 inset-0 bg-slate-800/10"></div>
-              <div className="absolute z-20 -ml-16 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 ">
+              <div className="absolute z-20 mt-2 -ml-16 p-2 flex flex-col gap-1 rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 ">
                 <div>
                   <button
                     className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 px-3 py-2 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
                     title="Click to edit this tweet."
-                    onClick={() => handleEdit(tweet.id)}>
+                    onClick={editSwitcher}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -248,6 +250,40 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
               </div>
             </div>
           }
+          {editButtonClicked &&
+            <div className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/10">
+              <div className="w-56 p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
+                <div className="p-3 rounded-full bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
+                <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-8 text-slate-100">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+                </div>
+                <div>
+                  <h3 className="text-lg text-slate-400">Edit you post</h3>
+                  <p className="text-sm text-slate-500">
+                    Are you sure you want to delete this post?
+                  </p>
+                </div>
+                <div className="w-full flex justify-between items-center gap-2">
+                  <button
+                    className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
+                    onClick={() => handleEdit(tweetId)}>Post</button>
+                  <button
+                    className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
+                    onClick={editSwitcher}>Cancel</button>
+                </div>
+              </div>
+            </div>
+          }
           {deleteButtonClicked &&
             <div ref={deleteButtonOutSideRef} className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/10">
               <div
@@ -276,7 +312,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                 <div className="w-full flex justify-between items-center gap-2">
                   <button
                     className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
-                    onClick={() => handleDelete(tweet.id)}>Delete</button>
+                    onClick={() => handleDelete(tweetId)}>Delete</button>
                   <button
                     className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
                     onClick={deleteSwitcher}>Cancel</button>

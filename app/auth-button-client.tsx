@@ -58,9 +58,8 @@ export default function AuthButtonClient({ session }: { session: Session | null 
         <Link
           href={"/" + userName}>
           <button
-            className="w-full flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
+            className="w-full z-20 flex gap-2 justify-start items-center text-md font-medium text-slate-500 p-1.5 rounded-md transition-all duration-300 ease-in-out hover:bg-sky-600/10 hover:text-sky-600"
             title="Click to open your profile.">
-
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

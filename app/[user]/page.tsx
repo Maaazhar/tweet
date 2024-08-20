@@ -92,7 +92,7 @@ export default async function IndividualUser({ params }: Params) {
                   href="#top"
                   title="Go to top"
                 >
-                  <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-sky-400">{userData?.name}</h1>
+                  <h1 className="text-gray-300/80 text-lg max-[350px]:text-md font-bolt capitalize hover:text-sky-400">{userData?.name.toLowerCase()}</h1>
                 </Link>
                 <p className="text-sm max-[350px]:text-xs">
                   {totalPost &&
@@ -103,6 +103,7 @@ export default async function IndividualUser({ params }: Params) {
               </div>
             </div>
           </div>
+          {/* <div className="fixed inset-0 z-20 w-screen h-screen bg-red-500"></div> */}
           <AuthButtonServer />
         </div>
         <div className="border border-gray-800 border-b-0">

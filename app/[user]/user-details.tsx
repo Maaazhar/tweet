@@ -36,11 +36,11 @@ export default function UserDetails({ user }: User) {
     <div
       className="border border-gray-800 border-t-0 border-x-0 p-5">
       <div className="border border-gray-800 p-1 mb-3 text-center text-slate-400 text-md">
-        <h4>Hi, <span className="capitalize"> {user.loggedInUserName}</span>, welcome
+        <h4>Hi, <span className="capitalize"> {user.loggedInUserName.toLowerCase()}</span>, welcome
           {user.id === user.loggedInUserID ?
             " back to your profile."
             : (<span> to the profile of
-              <span className="capitalize"> {user.name}. </span>
+              <span className="capitalize"> {user.name.toLowerCase()}. </span>
             </span>)}
         </h4>
       </div>
@@ -55,11 +55,11 @@ export default function UserDetails({ user }: User) {
         <div className="w-fit rounded-full bg-slate-900 p-2">
           <Image
             src={user.avatar}
-            alt={"Image of" + user.name}
+            alt={"Image of" + user.name.toLowerCase()}
             className="rounded-full"
             width={100} height={100} />
         </div>
-        <h1 className="text-slate-400 text-2xl">{user.name}</h1>
+        <h1 className="text-slate-400 text-2xl capitalize">{user.name.toLowerCase()}</h1>
         <Link
           href={"/" + user.userName}
           className="w-fit text-md text-slate-500 hover:text-sky-500">@{user.userName}

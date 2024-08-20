@@ -1,5 +1,6 @@
-#Tweet
-##An X (formerly known as twitter) clone.
+# Tweet
+> A micro blogging web application.
+## An X (formerly known as twitter) clone.
 
 
-###Live link : [https://tweetex.vercel.app](https://tweetex.vercel.app),
+### Live link : [https://tweetex.vercel.app](https://tweetex.vercel.app),
