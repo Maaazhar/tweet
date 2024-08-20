@@ -33,7 +33,9 @@ export default function AuthButtonClient({ session }: { session: Session | null 
     router.refresh();
   };
 
-  const userName = session.user.user_metadata.user_name ? session.user.user_metadata.user_name : session.user.user_metadata.email.split('@')[0];
+  const userName = session.user.user_metadata.user_name ?
+    session.user.user_metadata.user_name
+    : session.user.user_metadata.email.split('@')[0];
 
 
   return session && (<div
@@ -48,9 +50,7 @@ export default function AuthButtonClient({ session }: { session: Session | null 
         alt="User profile picture."
         className="size-10 rounded-full"
         width={50} height={50}>
-
       </Image>
-      {/*  */}
     </button>
     {profileClicked &&
       <div
