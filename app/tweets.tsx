@@ -6,19 +6,22 @@ import { useEffect, useOptimistic, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { title } from "process";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optionClicked, setOptionClicked] = useState<boolean>(false);
   const [deleteButtonClicked, setDeleteButtonClicked] = useState<boolean>(false);
   const [editButtonClicked, setEditButtonClicked] = useState<boolean>(false);
   const [tweetId, setTweetId] = useState<string>("");
+  const [tweetTitle, setTweetTitle] = useState<string>("");
   const optionButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonInSideRef = useRef<HTMLDivElement>(null);
 
-  const optionSwitcher = (id: string) => {
+  const optionSwitcher = (id: string, title: string) => {
     setOptionClicked((state: boolean) => !state);
     setTweetId(id);
+    setTweetTitle(title);
   }
 
   const deleteSwitcher = () => {
@@ -193,7 +196,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           {tweet.optionButton &&
             <div className="relative flex flex-col items-end">
               <button className="group size-8 flex justify-center items-center rounded-full transition-all duration-300 ease-in-out hover:shadow-[0px_0px_15px] hover:shadow-sky-500/50 hover:bg-transparent"
-                onClick={() => optionSwitcher(tweet.id)}
+                onClick={() => optionSwitcher(tweet.id, tweet.title)}
                 title="Click to see the options.">
                 <div className="flex gap-0.5">
                   <span className="size-1 bg-slate-500 rounded-full group-hover:bg-sky-600"></span>
@@ -252,34 +255,35 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           }
           {editButtonClicked &&
             <div className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/10">
-              <div className="w-56 p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
-                <div className="p-3 rounded-full bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
-                <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
+              <div className="h-5/6 flex justify-center items-center">
+                <div className="max-h-full overflow-y-auto max-w-72 md:max-w-lg p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
+                  <div className="w-full flex items-bas justify-center gap-x-1 p-2 rounded-md bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
+                    <h3 className="text-lg font-md">Edit you post here</h3>
+                    <svg
+                      fill="currentColor"
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-8 text-slate-100">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                      stroke="none"
+                      className="size-6 text-slate-100">
+                      <g>
+                        <path d="M14.23 2.854c.98-.977 2.56-.977 3.54 0l3.38 3.378c.97.977.97 2.559 0 3.536L9.91 21H3v-6.914L14.23 2.854zm2.12 1.414c-.19-.195-.51-.195-.7 0L5 14.914V19h4.09L19.73 8.354c.2-.196.2-.512 0-.708l-3.38-3.378zM14.75 19l-2 2H21v-2h-6.25z">
+                        </path>
+                      </g>
                     </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg text-slate-400">Edit you post</h3>
-                  <p className="text-sm text-slate-500">
-                    Are you sure you want to delete this post?
-                  </p>
-                </div>
-                <div className="w-full flex justify-between items-center gap-2">
-                  <button
-                    className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
-                    onClick={() => handleEdit(tweetId)}>Post</button>
-                  <button
-                    className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
-                    onClick={editSwitcher}>Cancel</button>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-500">
+                      {tweetTitle} 
+                    </p>
+                  </div>
+                  <div className="w-full flex justify-between items-center gap-2">
+                    <button
+                      className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
+                      onClick={() => handleEdit(tweetId)}>Post</button>
+                    <button
+                      className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
+                      onClick={editSwitcher}>Cancel</button>
+                  </div>
                 </div>
               </div>
             </div>
