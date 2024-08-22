@@ -15,7 +15,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optionClicked, setOptionClicked] = useState<boolean>(false);
   const [editButtonClicked, setEditButtonClicked] = useState<boolean>(false);
   const [deleteButtonClicked, setDeleteButtonClicked] = useState<boolean>(false);
-  
   const optionButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonInSideRef = useRef<HTMLDivElement>(null);
@@ -37,7 +36,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const tweetTitleUpdater = (title: string) => {
     setUpdatedTweetTitle(title)
   }
-
   const handleOutsideClickOfOptionMenu = (e: any) => {
     optionClicked &&
       optionButtonOutSideRef.current?.contains(e.target as Node) ?
@@ -84,14 +82,23 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
 
     error && console.log("Error: ", error);
     data && console.log("Deleted data: ", data);
-    setOptionClicked(false);
     setDeleteButtonClicked(false);
+    setOptionClicked(false);
     router.refresh();
   };
 
-  const handleEdit = async () => {
+  const handleEdit = async (id: string, title: string) => {
+    const { data, error } = await supabase
+      .from("tweets")
+      .update({title: title})
+      .eq("id", id)
+      .single();
+
+    error && console.log("Error: ", error);
+    data && console.log("Deleted data: ", data);
     console.log(updatedTweetTitle);
-    editSwitcher();
+    setEditButtonClicked(false);
+    setOptionClicked(false);
     router.refresh();
   };
 
@@ -264,7 +271,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             <div className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/30">
               <div className="h-5/6 w-full flex justify-center items-center">
                 <div className="h-fit max-h-full w-11/12 sm:w-[36rem] overflow-y-auto p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
-                  <div className="w-full flex justify-between">
+                  <div className="w-full flex justify-between items-center">
                     <div className="w-fit flex  justify-start gap-x-1 px-3 py-2 rounded-md bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
                       <h3 className="text-lg font-md">Edit you post here</h3>
                       <svg
@@ -279,7 +286,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                         </g>
                       </svg>
                     </div>
-                    <button className="w-fit px-3 py-2 bg-red-600 rounded-md text-xl font-md shadow-[0px_0px_10px] shadow-slate-950/50"
+                    <button className="w-fit px-2 py-1 bg-red-600 text-slate-200 rounded-md text-xl font-md shadow-[0px_0px_10px] shadow-slate-950/50"
                     onClick={editSwitcher}>X</button>
                   </div>
                   <div className="h-full max-h-full w-full flex flex-col items-start gap-2">
@@ -296,7 +303,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                     <div className="w-full flex justify-between items-center gap-x-3">
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
-                        onClick={() => handleEdit()}>Update</button>
+                        onClick={() => handleEdit(tweetId, updatedTweetTitle)}>Update</button>
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
                         onClick={editSwitcher}>Cancel</button>
