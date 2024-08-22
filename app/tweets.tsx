@@ -9,12 +9,13 @@ import Link from "next/link";
 import { title } from "process";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
-  const [optionClicked, setOptionClicked] = useState<boolean>(false);
-  const [deleteButtonClicked, setDeleteButtonClicked] = useState<boolean>(false);
-  const [editButtonClicked, setEditButtonClicked] = useState<boolean>(false);
   const [tweetId, setTweetId] = useState<string>("");
   const [tweetTitle, setTweetTitle] = useState<string>("");
   const [updatedTweetTitle, setUpdatedTweetTitle] = useState<string>("");
+  const [optionClicked, setOptionClicked] = useState<boolean>(false);
+  const [editButtonClicked, setEditButtonClicked] = useState<boolean>(false);
+  const [deleteButtonClicked, setDeleteButtonClicked] = useState<boolean>(false);
+  
   const optionButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonInSideRef = useRef<HTMLDivElement>(null);
@@ -25,17 +26,16 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     setTweetId(id);
     setTweetTitle(title);
   }
-
   const deleteSwitcher = () => {
     setDeleteButtonClicked((state: boolean) => !state);
     setOptionClicked((state: boolean) => !state);
   }
-  const tweetTitleUpdater = (title: string) => {
-    setUpdatedTweetTitle(title)
-  }
   const editSwitcher = () => {
     setEditButtonClicked((state: boolean) => !state);
     setOptionClicked((state: boolean) => !state);
+  }
+  const tweetTitleUpdater = (title: string) => {
+    setUpdatedTweetTitle(title)
   }
 
   const handleOutsideClickOfOptionMenu = (e: any) => {
@@ -261,11 +261,11 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             </div>
           }
           {editButtonClicked &&
-            <div className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/10">
+            <div className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/30">
               <div className="h-5/6 w-full flex justify-center items-center">
                 <div className="h-fit max-h-full w-11/12 sm:w-[36rem] overflow-y-auto p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
                   <div className="w-full flex justify-between">
-                    <div className="w-4/5 flex  justify-center gap-x-1 p-2 rounded-md bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
+                    <div className="w-fit flex  justify-start gap-x-1 px-3 py-2 rounded-md bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
                       <h3 className="text-lg font-md">Edit you post here</h3>
                       <svg
                         fill="currentColor"
@@ -279,7 +279,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                         </g>
                       </svg>
                     </div>
-                    <span className="w-fit p-2 bg-red-600 rounded-md text-2xl shadow-[0px_0px_10px] shadow-slate-950/50">X</span>
+                    <button className="w-fit px-3 py-2 bg-red-600 rounded-md text-xl font-md shadow-[0px_0px_10px] shadow-slate-950/50"
+                    onClick={editSwitcher}>X</button>
                   </div>
                   <div className="h-full max-h-full w-full flex flex-col items-start gap-2">
                     <span
@@ -295,7 +296,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                     <div className="w-full flex justify-between items-center gap-x-3">
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
-                        onClick={() => handleEdit()}>Post</button>
+                        onClick={() => handleEdit()}>Update</button>
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
                         onClick={editSwitcher}>Cancel</button>
