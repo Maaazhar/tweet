@@ -264,23 +264,26 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             <div className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/10">
               <div className="h-5/6 w-full flex justify-center items-center">
                 <div className="h-fit max-h-full w-11/12 sm:w-[36rem] overflow-y-auto p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
-                  <div className="w-full flex items-bas justify-center gap-x-1 p-2 rounded-md bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
-                    <h3 className="text-lg font-md">Edit you post here</h3>
-                    <svg
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="none"
-                      className="size-6 text-slate-100">
-                      <g>
-                        <path d="M14.23 2.854c.98-.977 2.56-.977 3.54 0l3.38 3.378c.97.977.97 2.559 0 3.536L9.91 21H3v-6.914L14.23 2.854zm2.12 1.414c-.19-.195-.51-.195-.7 0L5 14.914V19h4.09L19.73 8.354c.2-.196.2-.512 0-.708l-3.38-3.378zM14.75 19l-2 2H21v-2h-6.25z">
-                        </path>
-                      </g>
-                    </svg>
+                  <div className="w-full flex justify-between">
+                    <div className="w-4/5 flex  justify-center gap-x-1 p-2 rounded-md bg-sky-600 shadow-[0px_0px_10px] shadow-slate-950/50">
+                      <h3 className="text-lg font-md">Edit you post here</h3>
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="none"
+                        className="size-6 text-slate-100">
+                        <g>
+                          <path d="M14.23 2.854c.98-.977 2.56-.977 3.54 0l3.38 3.378c.97.977.97 2.559 0 3.536L9.91 21H3v-6.914L14.23 2.854zm2.12 1.414c-.19-.195-.51-.195-.7 0L5 14.914V19h4.09L19.73 8.354c.2-.196.2-.512 0-.708l-3.38-3.378zM14.75 19l-2 2H21v-2h-6.25z">
+                          </path>
+                        </g>
+                      </svg>
+                    </div>
+                    <span className="w-fit p-2 bg-red-600 rounded-md text-2xl shadow-[0px_0px_10px] shadow-slate-950/50">X</span>
                   </div>
                   <div className="h-full max-h-full w-full flex flex-col items-start gap-2">
                     <span
-                      className="h-fit max-h-full w-full p-2 rounded-md border border-slate-800 bg-transparent text-slate-500 focus:outline-none placeholder:text-slate-500 resize-none"
+                      className="h-fit max-h-full w-full p-3 rounded-md border border-slate-800 bg-transparent text-slate-500 text-left focus:outline-none placeholder:text-slate-500 resize-none"
                       ref={textAreaRef}
                       role="textbox"
                       contentEditable
@@ -289,7 +292,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                       id="editedTweet" >
                       {tweetTitle}
                     </span>
-                    <div className="w-full flex justify-between items-center gap-2">
+                    <div className="w-full flex justify-between items-center gap-x-3">
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
                         onClick={() => handleEdit()}>Post</button>
