@@ -18,7 +18,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const optionButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonOutSideRef = useRef<HTMLDivElement>(null);
   const deleteButtonInSideRef = useRef<HTMLDivElement>(null);
-  const textAreaRef = useRef<HTMLDivElement>(null);
 
   const optionSwitcher = (id: string, title: string) => {
     setOptionClicked((state: boolean) => !state);
@@ -87,10 +86,10 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     router.refresh();
   };
 
-  const handleEdit = async (id: string, title: string) => {
+  const handleEdit = async (id: string, title: string, updatedTitle: string) => {
     const { data, error } = await supabase
       .from("tweets")
-      .update({title: title})
+      .update({ title: updatedTitle })
       .eq("id", id)
       .single();
 
@@ -287,14 +286,13 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                       </svg>
                     </div>
                     <button className="w-fit px-2 py-1 bg-red-600 text-slate-200 rounded-md text-xl font-md shadow-[0px_0px_10px] shadow-slate-950/50"
-                    onClick={editSwitcher}>X</button>
+                      onClick={editSwitcher}>X</button>
                   </div>
                   <div className="h-full max-h-full w-full flex flex-col items-start gap-2">
                     <span
                       className="h-fit max-h-full w-full p-3 rounded-md border border-slate-800 bg-transparent text-slate-500 text-left focus:outline-none placeholder:text-slate-500 resize-none"
-                      ref={textAreaRef}
                       role="textbox"
-                      contentEditable
+                      contentEditable={true}
                       autoFocus={true}
                       onInput={(e) => tweetTitleUpdater(e.currentTarget.textContent as string)}
                       id="editedTweet" >
@@ -303,7 +301,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                     <div className="w-full flex justify-between items-center gap-x-3">
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
-                        onClick={() => handleEdit(tweetId, updatedTweetTitle)}>Update</button>
+                        onClick={() => handleEdit(tweetId, tweetTitle, updatedTweetTitle)}>Update</button>
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-red-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-red-600/10 hover:text-red-600"
                         onClick={editSwitcher}>Cancel</button>
@@ -352,7 +350,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         </div>
       </div>
       <div className="ml-2">
-        <p className="text-slate-300/85 break-words">{tweet.title}</p>
+        <p className="text-slate-300/85 break-words" >{tweet.title}</p>
         <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
       </div>
     </div >
