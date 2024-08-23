@@ -93,7 +93,6 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         .update({ title: updatedTitle })
         .eq("id", id)
         .single();
-
       error && console.log("Error: ", error);
       data && console.log("Deleted data: ", data);
       setEditButtonClicked(false);

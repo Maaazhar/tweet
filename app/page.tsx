@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import AuthButtonServer from "./auth-button-server";
 import { redirect } from "next/navigation";
 import NewTweet from "./new-tweet";
-import Likes from "./likes";
 import Tweets from "./tweets";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +18,10 @@ export default async function Home() {
     redirect("/login")
   }
   
-  const { data: tweetData } = await supabase.from("tweets").select("*, author: profiles(*), likes(user_id)").order("created_at", { ascending: false })
+  const { data: tweetData } = await supabase
+  .from("tweets")
+  .select("*, author: profiles(*), likes(user_id)")
+  .order("created_at", { ascending: false });
 
   const tweets = tweetData?.map(tweet => ({
     ...tweet,
@@ -52,7 +54,8 @@ export default async function Home() {
               <p
                 className="text-sm max-[400px]:text-xs text-gray-400"
               >
-                Hi, {session.user.user_metadata.full_name}. <br /> hope you&apos;re having a good day.
+                Hi, <span className="capitalize">{session.user.user_metadata.full_name.toLowerCase()}</span>. 
+                <br /> hope you&apos;re having a good day.
               </p>
             </div>
           </div>
