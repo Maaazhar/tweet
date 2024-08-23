@@ -87,18 +87,21 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   };
 
   const handleEdit = async (id: string, title: string, updatedTitle: string) => {
-    const { data, error } = await supabase
-      .from("tweets")
-      .update({ title: updatedTitle })
-      .eq("id", id)
-      .single();
+    if (!!updatedTitle && (updatedTitle !== title)) {
+      const { data, error } = await supabase
+        .from("tweets")
+        .update({ title: updatedTitle })
+        .eq("id", id)
+        .single();
 
-    error && console.log("Error: ", error);
-    data && console.log("Deleted data: ", data);
-    console.log(updatedTweetTitle);
-    setEditButtonClicked(false);
-    setOptionClicked(false);
-    router.refresh();
+      error && console.log("Error: ", error);
+      data && console.log("Deleted data: ", data);
+      setEditButtonClicked(false);
+      setOptionClicked(false);
+      router.refresh();
+    }
+    setEditButtonClicked((state: boolean) => !state);
+    setOptionClicked((state: boolean) => !state);
   };
 
   //converting time in to user timezone
@@ -312,7 +315,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
             </div>
           }
           {deleteButtonClicked &&
-            <div ref={deleteButtonOutSideRef} className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/10">
+            <div ref={deleteButtonOutSideRef} className="fixed inset-0 z-20 flex justify-center items-center bg-slate-800/30">
               <div
                 ref={deleteButtonInSideRef}
                 className="w-56 p-3 flex flex-col items-center gap-3 text-center rounded-md bg-slate-900 border border-slate-800 transition-all duration-300 ease-in-out drop-shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
