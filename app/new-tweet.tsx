@@ -11,7 +11,9 @@ export default function NewTweet({ user }: { user: User }) {
     "use server"
     const title = String(formData.get("title"));
     const supabase = createServerActionClient<Database>({ cookies });
-    await supabase.from("tweets").insert({ title, user_id: user.id })
+    await supabase
+    .from("tweets")
+    .insert({ title, user_id: user.id });
 
     console.log("submitted");
      // Clear the input field
@@ -41,7 +43,6 @@ export default function NewTweet({ user }: { user: User }) {
 
   return (
     <form
-      // ref={ref}
       action={addTweet}
       className="border border-gray-800 border-t-0 border-x-0"
     >
