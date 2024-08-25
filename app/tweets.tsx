@@ -106,10 +106,11 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         .update({ title: updatedTitle })
         .eq("id", id)
         .single();
-      error && console.log("Error: ", error);
-      data && console.log("Deleted data: ", data);
+
       setEditButtonClicked(false);
       setOptionClicked(false);
+      error && console.log("Error: ", error);
+      data && console.log("Deleted data: ", data);
       router.refresh();
     }
     setEditButtonClicked((state: boolean) => !state);
@@ -174,7 +175,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   // Alternative way
 
 
-  return optimisticTweets.map((tweet, i) => (
+  return optimisticTweets.map((tweet) => (
     <div key={tweet.id}
       className="border border-t-0 border-x-0 border-gray-800 p-6 flex flex-col">
       <div className="flex justify-between">
@@ -306,7 +307,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                   <div className="h-full max-h-full w-full flex flex-col items-start gap-2">
                     <textarea
                       ref={textareaRef}
-                      className="h-fit max-h-full w-full p-3 rounded-md border border-slate-800 bg-transparent text-slate-500 text-left focus:outline-none placeholder:text-slate-500 resize-none"                      
+                      className="h-fit max-h-full w-full p-3 rounded-md border border-slate-800 bg-transparent text-slate-500 text-left focus:outline-none placeholder:text-slate-500 resize-none"
                       autoFocus={true}
                       defaultValue={tweetTitle}
                       onInput={(e) => tweetTitleUpdater(e.currentTarget.value as string)}
