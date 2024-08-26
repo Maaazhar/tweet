@@ -1,15 +1,32 @@
 "use client";
 import { User, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
 export default function NewTweetT({ user }: { user: User }) {
   const [tweetTitle, setTweetTitle] = useState<string>("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const supabase = createClientComponentClient();
   const router = useRouter();
+
+  const resize = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = '0px';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    resize();
+  }, []);
+
+  const tweetTitleUpdater = (title: string) => {
+    setTweetTitle(title);
+    resize();
+  }
 
   // const addTweet = async (formData: FormData) => {
   //   "use server"
@@ -22,11 +39,12 @@ export default function NewTweetT({ user }: { user: User }) {
   // }
 
   const addTweet = async (title: string) => {
-    !!title &&  await supabase
-    .from("tweets")
-    .insert({ title, user_id: user.id });
+    !!title && await supabase
+      .from("tweets")
+      .insert({ title, user_id: user.id });
+
     router.refresh();
-  };
+  }
 
   return (
     <form
@@ -43,9 +61,15 @@ export default function NewTweetT({ user }: { user: User }) {
             width={48} height={48} />
         </div>
         <div>
-          <span
+          <textarea
+            ref={textareaRef}
+            name="title"
+            required
+            autoFocus={true}
             id="tweetTitle"
-            className="bg-inherit flex-1 ml-2 px-2 text-gray-100 text-md leading-loose focus:outline-none placeholder:text-slate-500 resize-none" ></span>
+            className=" h-fit max-h-full bg-inherit flex-1 ml-2 px-2 text-gray-100 text-md leading-loose focus:outline-none placeholder:text-slate-500 resize-none"
+            placeholder="What is happening..!"
+            onInput={(e) => tweetTitleUpdater(e.currentTarget.value as string)} />
         </div>
       </div>
       <div className="flex items-center justify-end mr-5 mb-5">

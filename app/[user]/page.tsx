@@ -7,6 +7,7 @@ import Tweets from "../tweets";
 import Link from "next/link";
 import Footer from "@/app/footer";
 import UserDetails from "./user-details";
+import NewTweetT from "../newTweet";
 
 export const dynamicParams = true
 export const dynamic = "force-dynamic";
@@ -109,7 +110,8 @@ export default async function IndividualUser({ params }: Params) {
         <div className="border border-gray-800 border-b-0">
           <UserDetails user={user} />
           {session.user.id === user.id &&
-            <NewTweet user={session.user} />
+            // <NewTweet user={session.user} />
+            <NewTweetT user={session.user} />
           }
           <Tweets tweets={tweets} />
         </div>
