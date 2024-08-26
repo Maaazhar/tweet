@@ -305,14 +305,23 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
                       onClick={editSwitcher}>X</button>
                   </div>
                   <div className="h-full max-h-full w-full flex flex-col items-start gap-2">
-                    <textarea
+                    {/* <textarea
                       ref={textareaRef}
                       className="h-fit max-h-full w-full p-3 rounded-md border border-slate-800 bg-transparent text-slate-500 text-left focus:outline-none placeholder:text-slate-500 resize-none"
                       autoFocus={true}
                       defaultValue={tweetTitle}
                       onInput={(e) => tweetTitleUpdater(e.currentTarget.value as string)}
                       id="editedTweet" >
-                    </textarea>
+                    </textarea> */}
+                    <span
+                      className="h-fit max-h-full w-full p-3 rounded-md border border-slate-800 bg-transparent text-slate-500 text-left focus:outline-none placeholder:text-slate-500 resize-none"
+                      role="textbox"
+                      contentEditable={true}
+                      autoFocus={true}
+                      onInput={(e) => tweetTitleUpdater(e.currentTarget.textContent as string)}
+                      id="editedTweet" >
+                      {tweetTitle}
+                    </span>
                     <div className="w-full flex justify-between items-center gap-x-3">
                       <button
                         className="w-full flex justify-center items-center text-md font-medium text-slate-200 px-3 py-2 bg-sky-600 rounded-md transition-all duration-300 ease-in-out shadow-[0px_0px_10px] shadow-slate-950/50 hover:bg-sky-600/10 hover:text-sky-600"
