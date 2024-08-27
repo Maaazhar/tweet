@@ -110,8 +110,8 @@ export default async function IndividualUser({ params }: Params) {
         <div className="border border-gray-800 border-b-0">
           <UserDetails user={user} />
           {session.user.id === user.id &&
-            <NewTweet user={session.user} />
             // <NewTweetT user={session.user} />
+            <NewTweet user={session.user} />
           }
           <Tweets tweets={tweets} />
         </div>
